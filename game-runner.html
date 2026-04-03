@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Game Runner Console — Game Øf Now</title>
+<style>
+body {
+  background-color: #990033;
+  margin: 0;
+  min-height: 100vh;
+  font-family: Georgia, serif;
+  padding: 60px 30px;
+  color: #ffffff;
+}
+main {
+  max-width: 600px;
+  margin: 0 auto;
+}
+a.back {
+  color: #ffd6e0;
+  text-decoration: none;
+  font-size: 16px;
+  font-style: italic;
+}
+a.back:hover {
+  color: #ffffff;
+}
+h1 {
+  font-size: 28px;
+  font-weight: normal;
+  margin: 40px 0 10px 0;
+  letter-spacing: 0.05em;
+}
+h2 {
+  font-size: 22px;
+  font-weight: normal;
+  margin: 50px 0 15px 0;
+  color: #ffd6e0;
+}
+h3 {
+  font-size: 18px;
+  font-weight: normal;
+  font-style: italic;
+  margin: 30px 0 10px 0;
+  color: #ffd6e0;
+}
+p {
+  font-size: 18px;
+  line-height: 1.8;
+  margin: 0 0 15px 0;
+}
+.subtitle {
+  color: #ffd6e0;
+  font-style: italic;
+  font-size: 18px;
+  margin-bottom: 40px;
+}
+.divider {
+  width: 1px;
+  height: 40px;
+  background: #cc6688;
+  margin: 40px auto;
+}
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 15px 0;
+}
+ul li {
+  font-size: 16px;
+  line-height: 1.8;
+  margin-bottom: 6px;
+  padding-left: 20px;
+  position: relative;
+}
+ul li:before {
+  content: "—";
+  position: absolute;
+  left: 0;
+  color: #cc6688;
+}
+pre {
+  background: rgba(0,0,0,0.2);
+  padding: 20px;
+  border-radius: 4px;
+  overflow-x: auto;
+  font-size: 14px;
+  line-height: 1.6;
+  font-family: monospace;
+  color: #ffd6e0;
+}
+</style>
+</head>
+<body>
+<main>
+<a class="back" href="vision.html">&larr; vision</a>
+
+<h1>Appendix B: Game Runner Console</h1>
+<p class="subtitle">Platform Specification</p>
+
+<div class="divider"></div>
+
+<h2>1. Core Roles and Features</h2>
+
+<h3>Game Runner Hub</h3>
+<ul>
+<li>Real-time game control dashboard</li>
+<li>AI assistance for challenge evaluation</li>
+<li>Live player monitoring and communication</li>
+<li>Challenge approval workflow</li>
+<li>Emergency pause/modify controls</li>
+</ul>
+
+<h3>Player Creator Tools</h3>
+<ul>
+<li>Challenge suggestion interface</li>
+<li>Real-time idea submission</li>
+<li>Collaboration tools with other players</li>
+<li>Direct line to Game Runner</li>
+<li>Challenge testing tools</li>
+</ul>
+
+<h3>AI Support System</h3>
+<ul>
+<li>Challenge safety evaluation</li>
+<li>Balance checking</li>
+<li>Similar challenge detection</li>
+<li>Location suitability analysis</li>
+<li>Real-time modification suggestions</li>
+</ul>
+
+<div class="divider"></div>
+
+<h2>2. Technical Architecture</h2>
+
+<h3>Game Runner Interface</h3>
+<ul>
+<li>Web-based control centre</li>
+<li>Mobile companion app</li>
+<li>Real-time analytics dashboard</li>
+<li>Player communication hub</li>
+<li>AI assistance panel</li>
+</ul>
+
+<h3>Backend Services</h3>
+<ul>
+<li>Real-time event processing</li>
+<li>AI evaluation pipeline</li>
+<li>Challenge repository</li>
+<li>Player profile management</li>
+<li>Location safety verification</li>
+</ul>
+
+<h3>Player Mobile App</h3>
+<ul>
+<li>Challenge creation tools</li>
+<li>Real-time participation</li>
+<li>Communication with Game Runner</li>
+<li>Team collaboration features</li>
+<li>Location awareness</li>
+</ul>
+
+<div class="divider"></div>
+
+<h2>3. Game Flow Systems</h2>
+
+<h3>Pre-Approved Challenges</h3>
+<ul>
+<li>Player submission form</li>
+<li>AI initial screening</li>
+<li>Game Runner review dashboard</li>
+<li>Modification requests</li>
+<li>Challenge library management</li>
+<li>Version control for iterations</li>
+</ul>
+
+<h3>Real-Time Creation</h3>
+<ul>
+<li>Live challenge proposal</li>
+<li>Rapid AI safety check</li>
+<li>Quick approval workflow</li>
+<li>Real-time deployment</li>
+<li>Dynamic modification tools</li>
+<li>Emergency stop controls</li>
+</ul>
+
+<h3>Hybrid Operations</h3>
+<ul>
+<li>Challenge template library</li>
+<li>Quick-modify tools</li>
+<li>Real-time adaptation system</li>
+<li>Player feedback loop</li>
+<li>Dynamic difficulty adjustment</li>
+</ul>
+
+<div class="divider"></div>
+
+<h2>4. Data Models</h2>
+
+<h3>Game Runner Profile</h3>
+<pre>{
+  runnerId: UUID,
+  name: String,
+  status: "active" | "break" | "planning",
+  currentSessions: [{
+    sessionId: UUID,
+    playerCount: Number,
+    activeChallenge: ChallengeId,
+    status: String
+  }],
+  aiAssistant: {
+    preferredSettings: Object,
+    savedResponses: Array,
+    customRules: Array
+  }
+}</pre>
+
+<h3>Challenge Model</h3>
+<pre>{
+  challengeId: UUID,
+  creator: {
+    type: "player" | "gameRunner" | "collaborative",
+    userId: UUID
+  },
+  status: "proposed" | "approved" | "live" |
+          "completed" | "archived",
+  reviewData: {
+    aiSafetyScore: Number,
+    runnerNotes: String,
+    modificationHistory: Array
+  },
+  executionType: "realTime" | "preApproved" | "hybrid",
+  requirements: {
+    location: Object,
+    players: Object,
+    safety: Object
+  }
+}</pre>
+
+<h3>Live Session Model</h3>
+<pre>{
+  sessionId: UUID,
+  gameRunner: UUID,
+  status: String,
+  activePlayers: Array,
+  activeChallenge: {
+    id: UUID,
+    modifications: Array,
+    startTime: Timestamp,
+    currentState: Object
+  },
+  communication: {
+    broadcast: Array,
+    privateMessages: Array,
+    alerts: Array
+  }
+}</pre>
+
+<div class="divider"></div>
+
+<h2>5. Safety and Moderation</h2>
+
+<h3>Challenge Safety</h3>
+<ul>
+<li>Location safety verification</li>
+<li>Physical activity risk assessment</li>
+<li>Weather condition monitoring</li>
+<li>Time of day considerations</li>
+<li>Group size management</li>
+</ul>
+
+<h3>Real-Time Moderation</h3>
+<ul>
+<li>Live challenge monitoring</li>
+<li>Instant modification tools</li>
+<li>Emergency stop protocol</li>
+<li>Player behaviour tracking</li>
+<li>Communication filtering</li>
+</ul>
+
+<h3>AI Safety Checks</h3>
+<ul>
+<li>Location appropriateness</li>
+<li>Physical safety parameters</li>
+<li>Social interaction guidelines</li>
+<li>Content appropriateness</li>
+<li>Difficulty balance</li>
+</ul>
+
+<div class="divider"></div>
+
+<h2>6. Communication Systems</h2>
+
+<h3>Game Runner Broadcasting</h3>
+<ul>
+<li>Announcement system</li>
+<li>Individual player messaging</li>
+<li>Team communications</li>
+<li>Emergency alerts</li>
+<li>Challenge updates</li>
+</ul>
+
+<h3>Player Communication</h3>
+<ul>
+<li>Direct line to Game Runner</li>
+<li>Team chat</li>
+<li>Challenge suggestions</li>
+<li>Help requests</li>
+<li>Safety alerts</li>
+</ul>
+
+<div class="divider"></div>
+
+<h2>7. Mobile Requirements</h2>
+
+<h3>Game Runner Companion App</h3>
+<ul>
+<li>Quick access controls</li>
+<li>Real-time monitoring</li>
+<li>Challenge management</li>
+<li>Communication hub</li>
+<li>Analytics dashboard</li>
+</ul>
+
+<h3>Player App</h3>
+<ul>
+<li>Challenge participation</li>
+<li>Creation tools</li>
+<li>Team coordination</li>
+<li>Location awareness</li>
+<li>Runner communication</li>
+</ul>
+
+<div class="divider"></div>
+
+<h2>8. Development Phases</h2>
+
+<h3>Phase 1 — Core Platform</h3>
+<ul>
+<li>Game Runner dashboard</li>
+<li>Basic challenge creation</li>
+<li>Essential AI safety checks</li>
+<li>Fundamental communication</li>
+<li>Location services</li>
+</ul>
+
+<h3>Phase 2 — Enhanced Features</h3>
+<ul>
+<li>Advanced AI assistance</li>
+<li>Rich challenge templates</li>
+<li>Enhanced real-time tools</li>
+<li>Advanced safety features</li>
+<li>Expanded creator tools</li>
+</ul>
+
+<h3>Phase 3 — Advanced Platform</h3>
+<ul>
+<li>Machine learning optimisation</li>
+<li>Complex challenge types</li>
+<li>Advanced analytics</li>
+<li>Community features</li>
+<li>API for extensions</li>
+</ul>
+
+<div class="divider"></div>
+
+<a class="back" href="vision.html">&larr; vision</a>
+</main>
+</body>
+</html>

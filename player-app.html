@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Player App Specification — Game Øf Now</title>
+<style>
+body {
+  background-color: #990033;
+  margin: 0;
+  min-height: 100vh;
+  font-family: Georgia, serif;
+  padding: 60px 30px;
+  color: #ffffff;
+}
+main {
+  max-width: 600px;
+  margin: 0 auto;
+}
+a.back {
+  color: #ffd6e0;
+  text-decoration: none;
+  font-size: 16px;
+  font-style: italic;
+}
+a.back:hover {
+  color: #ffffff;
+}
+h1 {
+  font-size: 28px;
+  font-weight: normal;
+  margin: 40px 0 10px 0;
+  letter-spacing: 0.05em;
+}
+h2 {
+  font-size: 22px;
+  font-weight: normal;
+  margin: 50px 0 15px 0;
+  color: #ffd6e0;
+}
+h3 {
+  font-size: 18px;
+  font-weight: normal;
+  font-style: italic;
+  margin: 30px 0 10px 0;
+  color: #ffd6e0;
+}
+h4 {
+  font-size: 16px;
+  font-weight: normal;
+  margin: 20px 0 8px 0;
+  color: #ffd6e0;
+}
+p {
+  font-size: 18px;
+  line-height: 1.8;
+  margin: 0 0 15px 0;
+}
+.subtitle {
+  color: #ffd6e0;
+  font-style: italic;
+  font-size: 18px;
+  margin-bottom: 40px;
+}
+.divider {
+  width: 1px;
+  height: 40px;
+  background: #cc6688;
+  margin: 40px auto;
+}
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 15px 0;
+}
+ul li {
+  font-size: 16px;
+  line-height: 1.8;
+  margin-bottom: 6px;
+  padding-left: 20px;
+  position: relative;
+}
+ul li:before {
+  content: "—";
+  position: absolute;
+  left: 0;
+  color: #cc6688;
+}
+pre {
+  background: rgba(0,0,0,0.2);
+  padding: 20px;
+  border-radius: 4px;
+  overflow-x: auto;
+  font-size: 14px;
+  line-height: 1.6;
+  font-family: monospace;
+  color: #ffd6e0;
+}
+</style>
+</head>
+<body>
+<main>
+<a class="back" href="vision.html">&larr; vision</a>
+
+<h1>Appendix A: Player App</h1>
+<p class="subtitle">Technical Specification</p>
+
+<div class="divider"></div>
+
+<h2>1. System Overview</h2>
+
+<h3>Core Features</h3>
+<ul>
+<li>Mixed social gameplay (synchronous and asynchronous)</li>
+<li>Real-time player location tracking</li>
+<li>Puzzle system with collaborative solving</li>
+<li>Team formation and management</li>
+<li>Player matching system</li>
+</ul>
+
+<h3>User Types</h3>
+<ul>
+<li>Individual Players</li>
+<li>Team Leaders</li>
+<li>Team Members</li>
+<li>Guest Players (Limited Access)</li>
+<li>Administrators</li>
+</ul>
+
+<div class="divider"></div>
+
+<h2>2. Technical Architecture</h2>
+
+<h3>Frontend</h3>
+<ul>
+<li>React Native mobile app</li>
+<li>Mapbox for location services</li>
+<li>WebSocket for real-time features</li>
+<li>Local storage for offline puzzle progress</li>
+</ul>
+
+<h3>Backend</h3>
+<ul>
+<li>Node.js server</li>
+<li>PostgreSQL database</li>
+<li>Redis for real-time features</li>
+<li>MongoDB for puzzle/game content</li>
+</ul>
+
+<h3>APIs and Services</h3>
+<ul>
+<li>Authentication service</li>
+<li>Real-time location service</li>
+<li>Team management service</li>
+<li>Puzzle management service</li>
+<li>Matchmaking service</li>
+</ul>
+
+<div class="divider"></div>
+
+<h2>3. Core Features</h2>
+
+<h3>Location Services</h3>
+<ul>
+<li>Real-time player position tracking</li>
+<li>Geofencing for puzzle areas</li>
+<li>Proximity detection for team members</li>
+<li>Location-based puzzle triggers</li>
+</ul>
+
+<h3>Synchronous Social Features</h3>
+<ul>
+<li>Live team chat</li>
+<li>Real-time player positions</li>
+<li>Joint puzzle solving interface</li>
+<li>Live team formation</li>
+</ul>
+
+<h3>Asynchronous Social Features</h3>
+<ul>
+<li>Team message board</li>
+<li>Puzzle progress tracking</li>
+<li>Team achievements</li>
+<li>Challenge completions</li>
+</ul>
+
+<h3>Puzzle System</h3>
+<ul>
+<li>Multiple puzzle types</li>
+<li>Collaborative solving mechanics</li>
+<li>Progress saving</li>
+<li>Difficulty scaling</li>
+<li>Hint system</li>
+</ul>
+
+<h3>Team Management</h3>
+<ul>
+<li>Team creation</li>
+<li>Invite system</li>
+<li>Role management</li>
+<li>Team chat</li>
+<li>Team progress tracking</li>
+</ul>
+
+<div class="divider"></div>
+
+<h2>4. Data Models</h2>
+
+<h3>User Model</h3>
+<pre>{
+  userId: UUID,
+  username: String,
+  email: String,
+  profilePic: URL,
+  currentTeams: [TeamId],
+  stats: {
+    puzzlesSolved: Number,
+    teamsJoined: Number,
+    achievements: [AchievementId]
+  },
+  lastActive: Timestamp
+}</pre>
+
+<h3>Team Model</h3>
+<pre>{
+  teamId: UUID,
+  name: String,
+  leader: UserId,
+  members: [UserId],
+  currentPuzzle: PuzzleId,
+  completedPuzzles: [PuzzleId],
+  chatHistory: [MessageId],
+  created: Timestamp
+}</pre>
+
+<h3>Puzzle Model</h3>
+<pre>{
+  puzzleId: UUID,
+  type: String,
+  difficulty: Number,
+  location: {
+    lat: Number,
+    lng: Number,
+    radius: Number
+  },
+  requirements: {
+    minPlayers: Number,
+    maxPlayers: Number,
+    timeLimit: Number
+  },
+  content: Object,
+  hints: [String]
+}</pre>
+
+<div class="divider"></div>
+
+<h2>5. Security</h2>
+
+<h3>User Security</h3>
+<ul>
+<li>JWT authentication</li>
+<li>Session management</li>
+<li>Password encryption</li>
+<li>Rate limiting</li>
+</ul>
+
+<h3>Location Security</h3>
+<ul>
+<li>Location data encryption</li>
+<li>Proximity masking options</li>
+<li>Privacy controls</li>
+</ul>
+
+<h3>Data Protection</h3>
+<ul>
+<li>GDPR compliance</li>
+<li>Data retention policies</li>
+<li>User data export</li>
+<li>Right to be forgotten</li>
+</ul>
+
+<div class="divider"></div>
+
+<h2>6. Performance Requirements</h2>
+
+<h3>Response Times</h3>
+<ul>
+<li>API responses &lt; 200ms</li>
+<li>Real-time updates &lt; 100ms</li>
+<li>Location updates &lt; 1s</li>
+<li>Chat delivery &lt; 500ms</li>
+</ul>
+
+<h3>Scalability</h3>
+<ul>
+<li>Support for 10,000 concurrent users</li>
+<li>1,000 active teams</li>
+<li>100 simultaneous puzzles per region</li>
+</ul>
+
+<h3>Availability</h3>
+<ul>
+<li>99.9% uptime</li>
+<li>Automatic failover</li>
+<li>Regional server distribution</li>
+</ul>
+
+<div class="divider"></div>
+
+<h2>7. Mobile Requirements</h2>
+
+<h3>Minimum Specs</h3>
+<ul>
+<li>iOS 13+</li>
+<li>Android 8+</li>
+<li>2GB RAM</li>
+<li>GPS capability</li>
+<li>Internet connection</li>
+</ul>
+
+<h3>Battery Optimisation</h3>
+<ul>
+<li>Location polling intervals</li>
+<li>Background refresh limits</li>
+<li>Push notification batching</li>
+</ul>
+
+<div class="divider"></div>
+
+<h2>8. Future Considerations</h2>
+
+<h3>Expansion Features</h3>
+<ul>
+<li>AR puzzle elements</li>
+<li>Voice chat</li>
+<li>Custom puzzle creation</li>
+<li>Tournament system</li>
+<li>Inter-team challenges</li>
+</ul>
+
+<div class="divider"></div>
+
+<h2>9. Development Phases</h2>
+
+<h3>Phase 1 — MVP</h3>
+<ul>
+<li>Basic user authentication</li>
+<li>Simple puzzle system</li>
+<li>Team creation</li>
+<li>Location tracking</li>
+<li>Basic chat</li>
+</ul>
+
+<h3>Phase 2 — Enhanced Features</h3>
+<ul>
+<li>Advanced puzzles</li>
+<li>Matchmaking</li>
+<li>Achievement system</li>
+<li>Enhanced social features</li>
+</ul>
+
+<h3>Phase 3 — Advanced Features</h3>
+<ul>
+<li>AR integration</li>
+<li>Custom puzzles</li>
+<li>Tournament system</li>
+<li>Advanced analytics</li>
+</ul>
+
+<div class="divider"></div>
+
+<a class="back" href="vision.html">&larr; vision</a>
+</main>
+</body>
+</html>
