@@ -1,0 +1,650 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Moon Pulse · The Game of Now</title>
+  <meta name="description" content="Align with the lunar rhythm. New Moon intentions. Full Moon celebrations. A pulse for all of humanity." />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --crimson: #990033;
+      --crimson-light: #b30040;
+      --cream: #faf8f4;
+      --ink: #1a1a1a;
+      --muted: #6b6460;
+      --border: #ddd8d0;
+      --bg-card: #ffffff;
+    }
+
+    body {
+      background: var(--cream);
+      color: var(--ink);
+      font-family: Georgia, 'Times New Roman', serif;
+      min-height: 100vh;
+      padding: 0;
+    }
+
+    header {
+      background: var(--crimson);
+      padding: 1.25rem 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    header a {
+      color: rgba(255,255,255,0.85);
+      text-decoration: none;
+      font-family: Georgia, serif;
+      font-size: 13px;
+      letter-spacing: 0.08em;
+    }
+
+    header a:hover { color: #fff; }
+
+    header .site-name {
+      font-size: 15px;
+      color: #fff;
+      letter-spacing: 0.06em;
+      font-weight: normal;
+    }
+
+    .container {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 3rem 1.5rem 4rem;
+    }
+
+    h1 {
+      font-size: 2.4rem;
+      font-weight: normal;
+      color: var(--crimson);
+      letter-spacing: 0.01em;
+      margin-bottom: 6px;
+      line-height: 1.1;
+    }
+
+    .tagline {
+      font-size: 14px;
+      color: var(--muted);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 2.5rem;
+    }
+
+    .loc-row {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 6px;
+    }
+
+    .loc-row input {
+      flex: 1;
+      font-family: Georgia, serif;
+      font-size: 14px;
+      padding: 9px 12px;
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      background: #fff;
+      color: var(--ink);
+      outline: none;
+    }
+
+    .loc-row input:focus {
+      border-color: var(--crimson);
+    }
+
+    .loc-row button, .btn {
+      font-family: Georgia, serif;
+      font-size: 13px;
+      padding: 9px 14px;
+      border: 1px solid var(--crimson);
+      border-radius: 4px;
+      background: transparent;
+      color: var(--crimson);
+      cursor: pointer;
+      white-space: nowrap;
+      transition: background 0.15s, color 0.15s;
+    }
+
+    .loc-row button:hover, .btn:hover {
+      background: var(--crimson);
+      color: #fff;
+    }
+
+    .tz-label {
+      font-size: 12px;
+      color: var(--muted);
+      margin-bottom: 2rem;
+      min-height: 18px;
+      font-family: Georgia, serif;
+    }
+
+    .moon-panel {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1.75rem;
+      margin-bottom: 1.25rem;
+    }
+
+    .phase-name {
+      font-size: 1.5rem;
+      color: var(--crimson);
+      margin-bottom: 4px;
+    }
+
+    .illum-text {
+      font-size: 13px;
+      color: var(--muted);
+      margin-bottom: 10px;
+      font-family: Georgia, serif;
+    }
+
+    .progress-bar {
+      height: 2px;
+      background: var(--border);
+      border-radius: 2px;
+      overflow: hidden;
+    }
+
+    .progress-fill {
+      height: 100%;
+      background: var(--crimson);
+      border-radius: 2px;
+      transition: width 0.5s;
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-bottom: 2rem;
+    }
+
+    @media (max-width: 480px) {
+      .cards { grid-template-columns: 1fr; }
+      .moon-panel { flex-direction: column; text-align: center; }
+    }
+
+    .card {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1.25rem;
+    }
+
+    .card-label {
+      font-size: 11px;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 6px;
+      font-family: Georgia, serif;
+    }
+
+    .card-time {
+      font-size: 1rem;
+      color: var(--ink);
+      margin-bottom: 3px;
+    }
+
+    .card-cd {
+      font-size: 13px;
+      color: var(--crimson);
+      font-family: Georgia, serif;
+    }
+
+    .tabs {
+      display: flex;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 1.25rem;
+    }
+
+    .tab {
+      font-family: Georgia, serif;
+      font-size: 14px;
+      padding: 10px 16px;
+      cursor: pointer;
+      border: none;
+      background: none;
+      color: var(--muted);
+      border-bottom: 2px solid transparent;
+      margin-bottom: -1px;
+      transition: color 0.15s;
+    }
+
+    .tab.active {
+      color: var(--crimson);
+      border-bottom-color: var(--crimson);
+    }
+
+    .journal { display: none; }
+    .journal.active { display: block; }
+
+    .journal-prompt {
+      font-size: 15px;
+      font-style: italic;
+      color: var(--muted);
+      margin-bottom: 12px;
+      line-height: 1.6;
+    }
+
+    textarea {
+      width: 100%;
+      font-family: Georgia, serif;
+      font-size: 14px;
+      padding: 12px;
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      min-height: 100px;
+      resize: vertical;
+      color: var(--ink);
+      background: #fff;
+      outline: none;
+      line-height: 1.6;
+    }
+
+    textarea:focus { border-color: var(--crimson); }
+
+    .journal-actions {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 10px;
+    }
+
+    .saved-msg {
+      font-size: 12px;
+      color: var(--muted);
+      font-family: Georgia, serif;
+    }
+
+    .entries { margin-top: 1.5rem; }
+
+    .entry {
+      border-top: 1px solid var(--border);
+      padding: 12px 0;
+    }
+
+    .entry-date {
+      font-size: 11px;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 4px;
+      font-family: Georgia, serif;
+    }
+
+    .entry-text {
+      font-size: 14px;
+      color: var(--ink);
+      line-height: 1.7;
+    }
+
+    .no-entries {
+      font-size: 14px;
+      color: var(--muted);
+      text-align: center;
+      padding: 2rem 0;
+      font-style: italic;
+    }
+
+    .divider {
+      border: none;
+      border-top: 1px solid var(--border);
+      margin: 3rem 0;
+    }
+
+    .footer-text {
+      font-size: 13px;
+      color: var(--muted);
+      text-align: center;
+      line-height: 1.8;
+    }
+
+    .footer-text a {
+      color: var(--crimson);
+      text-decoration: none;
+    }
+
+    .footer-text a:hover { text-decoration: underline; }
+  </style>
+</head>
+<body>
+
+<header>
+  <span class="site-name">The Game of Now</span>
+  <a href="https://gameofnow.com">← gameofnow.com</a>
+</header>
+
+<div class="container">
+  <h1>Moon Pulse</h1>
+  <p class="tagline">Align with the rhythm of the Earth</p>
+
+  <div class="loc-row">
+    <input type="text" id="cityInput" placeholder="Enter your city (e.g. Barcelona, Nairobi, Tokyo)..." />
+    <button onclick="setCity()">Set</button>
+    <button onclick="autoDetect()">Detect</button>
+  </div>
+  <p class="tz-label" id="tzLabel">Using your device timezone.</p>
+
+  <div class="moon-panel">
+    <svg id="moonSvg" width="80" height="80" viewBox="0 0 80 80" style="flex-shrink:0"></svg>
+    <div style="flex:1">
+      <p class="phase-name" id="phaseName">—</p>
+      <p class="illum-text" id="illumText">—</p>
+      <div class="progress-bar">
+        <div class="progress-fill" id="cycleBar" style="width:0%"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="cards">
+    <div class="card">
+      <p class="card-label">New Moon</p>
+      <p class="card-time" id="newMoonTime">—</p>
+      <p class="card-cd" id="newMoonCd">—</p>
+    </div>
+    <div class="card">
+      <p class="card-label">Full Moon</p>
+      <p class="card-time" id="fullMoonTime">—</p>
+      <p class="card-cd" id="fullMoonCd">—</p>
+    </div>
+  </div>
+
+  <div class="tabs">
+    <button class="tab active" onclick="switchTab('new')">New Moon intentions</button>
+    <button class="tab" onclick="switchTab('full')">Full Moon celebrations</button>
+  </div>
+
+  <div class="journal active" id="jNew">
+    <p class="journal-prompt">"What do I intend to begin, seed, or call in during this lunar cycle?"</p>
+    <textarea id="tNew" placeholder="Write your intention for this New Moon..."></textarea>
+    <div class="journal-actions">
+      <button class="btn" onclick="saveEntry('new')">Save intention</button>
+      <span class="saved-msg" id="sNew"></span>
+    </div>
+    <div class="entries" id="eNew"></div>
+  </div>
+
+  <div class="journal" id="jFull">
+    <p class="journal-prompt">"What has grown, ripened, or arrived that I want to honour and release?"</p>
+    <textarea id="tFull" placeholder="Write your celebration for this Full Moon..."></textarea>
+    <div class="journal-actions">
+      <button class="btn" onclick="saveEntry('full')">Save celebration</button>
+      <span class="saved-msg" id="sFull"></span>
+    </div>
+    <div class="entries" id="eFull"></div>
+  </div>
+
+  <hr class="divider" />
+
+  <p class="footer-text">
+    Part of <a href="https://gameofnow.com">The Game of Now</a> — a presence-based practice for all of humanity.<br>
+    Pulse together on every New Moon and Full Moon. No brand. No institution. Just us.
+  </p>
+</div>
+
+<script>
+const SYN = 29.530588853;
+const BASE = new Date('2000-01-06T18:14:00Z').getTime();
+let userTz = Intl.DateTimeFormat().resolvedOptions().timeZone;
+let cityLabel = '';
+
+function moonAge(d) {
+  const days = (d.getTime() - BASE) / 86400000;
+  return ((days % SYN) + SYN) % SYN;
+}
+
+function nextNew(d) {
+  const age = moonAge(d);
+  const dtn = age < 0.4 ? SYN - age : SYN - age;
+  return new Date(d.getTime() + dtn * 86400000);
+}
+
+function nextFull(d) {
+  const age = moonAge(d);
+  let dtf = ((SYN / 2 - age) + SYN) % SYN;
+  if (dtf < 0.4) dtf += SYN;
+  return new Date(d.getTime() + dtf * 86400000);
+}
+
+function illumination(age) {
+  return Math.round((1 - Math.cos(2 * Math.PI * age / SYN)) / 2 * 100);
+}
+
+function phaseName(age) {
+  const p = age / SYN;
+  if (p < 0.03 || p > 0.97) return 'New Moon';
+  if (p < 0.25) return 'Waxing Crescent';
+  if (p < 0.28) return 'First Quarter';
+  if (p < 0.48) return 'Waxing Gibbous';
+  if (p < 0.53) return 'Full Moon';
+  if (p < 0.73) return 'Waning Gibbous';
+  if (p < 0.77) return 'Last Quarter';
+  return 'Waning Crescent';
+}
+
+function drawMoon(age) {
+  const svg = document.getElementById('moonSvg');
+  const r = 36, cx = 40, cy = 40;
+  const phase = age / SYN;
+  const pct = illumination(age) / 100;
+  const darkFill = '#c8c0b4';
+  const litFill = '#fff8ee';
+  const strokeC = '#bbb0a4';
+
+  if (pct < 0.02) {
+    svg.innerHTML = `<circle cx="${cx}" cy="${cy}" r="${r}" fill="${darkFill}" stroke="${strokeC}" stroke-width="1"/>`;
+    return;
+  }
+  if (pct > 0.98) {
+    svg.innerHTML = `<circle cx="${cx}" cy="${cy}" r="${r}" fill="${litFill}" stroke="${strokeC}" stroke-width="1"/>`;
+    return;
+  }
+  const waxing = phase < 0.5;
+  const termX = cx + r * Math.cos(Math.PI * (waxing ? 1 - 2 * pct : 2 * pct - 1));
+  const sweep = waxing ? 1 : 0;
+  const tSweep = waxing ? 0 : 1;
+  const d = `M ${cx} ${cy - r} A ${r} ${r} 0 1 ${sweep} ${cx} ${cy + r} A ${Math.abs(termX - cx)} ${r} 0 1 ${tSweep} ${cx} ${cy - r} Z`;
+  svg.innerHTML = `
+    <circle cx="${cx}" cy="${cy}" r="${r}" fill="${darkFill}" stroke="${strokeC}" stroke-width="1"/>
+    <path d="${d}" fill="${litFill}"/>
+    <circle cx="${cx}" cy="${cy}" r="${r}" fill="none" stroke="${strokeC}" stroke-width="1"/>
+  `;
+}
+
+function fmtTime(date) {
+  try {
+    return date.toLocaleString('en-GB', {
+      timeZone: userTz,
+      weekday: 'short', day: 'numeric', month: 'long', year: 'numeric',
+      hour: '2-digit', minute: '2-digit'
+    });
+  } catch(e) {
+    return date.toLocaleString();
+  }
+}
+
+function countdown(target) {
+  const diff = target - new Date();
+  if (diff <= 0) return 'happening now';
+  const d = Math.floor(diff / 86400000);
+  const h = Math.floor((diff % 86400000) / 3600000);
+  const m = Math.floor((diff % 3600000) / 60000);
+  if (d > 0) return `in ${d} days, ${h} hours`;
+  if (h > 0) return `in ${h} hours, ${m} minutes`;
+  return `in ${m} minutes`;
+}
+
+function updateDisplay() {
+  const now = new Date();
+  const age = moonAge(now);
+  drawMoon(age);
+  document.getElementById('phaseName').textContent = phaseName(age);
+  document.getElementById('illumText').textContent =
+    `${illumination(age)}% illuminated · day ${Math.floor(age)} of 29`;
+  document.getElementById('cycleBar').style.width = Math.round(age / SYN * 100) + '%';
+  const nn = nextNew(now);
+  const nf = nextFull(now);
+  document.getElementById('newMoonTime').textContent = fmtTime(nn);
+  document.getElementById('fullMoonTime').textContent = fmtTime(nf);
+  document.getElementById('newMoonCd').textContent = countdown(nn);
+  document.getElementById('fullMoonCd').textContent = countdown(nf);
+}
+
+function setTzLabel() {
+  const label = cityLabel ? `${cityLabel} · ` : '';
+  document.getElementById('tzLabel').textContent = `Times shown in: ${label}${userTz}`;
+}
+
+const CITIES = {
+  'barcelona': 'Europe/Madrid', 'madrid': 'Europe/Madrid', 'sant cugat': 'Europe/Madrid',
+  'seville': 'Europe/Madrid', 'valencia': 'Europe/Madrid', 'bilbao': 'Europe/Madrid',
+  'london': 'Europe/London', 'edinburgh': 'Europe/London', 'glasgow': 'Europe/London',
+  'paris': 'Europe/Paris', 'berlin': 'Europe/Berlin', 'rome': 'Europe/Rome',
+  'amsterdam': 'Europe/Amsterdam', 'athens': 'Europe/Athens', 'andros': 'Europe/Athens',
+  'lisbon': 'Europe/Lisbon', 'stockholm': 'Europe/Stockholm', 'oslo': 'Europe/Oslo',
+  'helsinki': 'Europe/Helsinki', 'warsaw': 'Europe/Warsaw', 'prague': 'Europe/Prague',
+  'vienna': 'Europe/Vienna', 'zurich': 'Europe/Zurich', 'brussels': 'Europe/Brussels',
+  'istanbul': 'Europe/Istanbul', 'moscow': 'Europe/Moscow', 'kyiv': 'Europe/Kyiv',
+  'new york': 'America/New_York', 'boston': 'America/New_York', 'miami': 'America/New_York',
+  'chicago': 'America/Chicago', 'dallas': 'America/Chicago', 'denver': 'America/Denver',
+  'los angeles': 'America/Los_Angeles', 'san francisco': 'America/Los_Angeles',
+  'seattle': 'America/Los_Angeles', 'toronto': 'America/Toronto', 'montreal': 'America/Toronto',
+  'vancouver': 'America/Vancouver', 'mexico city': 'America/Mexico_City',
+  'bogota': 'America/Bogota', 'lima': 'America/Lima', 'santiago': 'America/Santiago',
+  'sao paulo': 'America/Sao_Paulo', 'rio de janeiro': 'America/Sao_Paulo',
+  'buenos aires': 'America/Argentina/Buenos_Aires',
+  'cairo': 'Africa/Cairo', 'nairobi': 'Africa/Nairobi', 'lagos': 'Africa/Lagos',
+  'accra': 'Africa/Accra', 'johannesburg': 'Africa/Johannesburg',
+  'casablanca': 'Africa/Casablanca', 'addis ababa': 'Africa/Addis_Ababa',
+  'dubai': 'Asia/Dubai', 'delhi': 'Asia/Kolkata', 'new delhi': 'Asia/Kolkata',
+  'mumbai': 'Asia/Kolkata', 'kolkata': 'Asia/Kolkata', 'jodhpur': 'Asia/Kolkata',
+  'karachi': 'Asia/Karachi', 'dhaka': 'Asia/Dhaka', 'colombo': 'Asia/Colombo',
+  'bangkok': 'Asia/Bangkok', 'jakarta': 'Asia/Jakarta', 'singapore': 'Asia/Singapore',
+  'kuala lumpur': 'Asia/Kuala_Lumpur', 'hong kong': 'Asia/Hong_Kong',
+  'beijing': 'Asia/Shanghai', 'shanghai': 'Asia/Shanghai', 'taipei': 'Asia/Taipei',
+  'tokyo': 'Asia/Tokyo', 'seoul': 'Asia/Seoul', 'manila': 'Asia/Manila',
+  'sydney': 'Australia/Sydney', 'melbourne': 'Australia/Melbourne',
+  'perth': 'Australia/Perth', 'auckland': 'Pacific/Auckland',
+  'honolulu': 'Pacific/Honolulu', 'fiji': 'Pacific/Fiji'
+};
+
+function setCity() {
+  const val = document.getElementById('cityInput').value.trim();
+  if (!val) return;
+  const key = val.toLowerCase();
+  const tz = CITIES[key];
+  if (tz) {
+    userTz = tz;
+    cityLabel = val;
+    setTzLabel();
+    updateDisplay();
+  } else {
+    document.getElementById('tzLabel').textContent =
+      `"${val}" not found — try a nearby major city. Using: ${userTz}`;
+  }
+}
+
+function autoDetect() {
+  document.getElementById('tzLabel').textContent = 'Detecting your location...';
+  if (!navigator.geolocation) {
+    setTzLabel();
+    return;
+  }
+  navigator.geolocation.getCurrentPosition(
+    async (pos) => {
+      const { latitude: lat, longitude: lng } = pos.coords;
+      try {
+        const r = await fetch(
+          `https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${lat}&longitude=${lng}&localityLanguage=en`
+        );
+        const d = await r.json();
+        cityLabel = d.city || d.locality || '';
+        const r2 = await fetch(
+          `https://timeapi.io/api/timezone/coordinate?latitude=${lat}&longitude=${lng}`
+        );
+        const d2 = await r2.json();
+        if (d2.timeZone) userTz = d2.timeZone;
+      } catch(e) {
+        userTz = Intl.DateTimeFormat().resolvedOptions().timeZone;
+        cityLabel = '';
+      }
+      setTzLabel();
+      updateDisplay();
+    },
+    () => {
+      userTz = Intl.DateTimeFormat().resolvedOptions().timeZone;
+      setTzLabel();
+      updateDisplay();
+    }
+  );
+}
+
+function switchTab(type) {
+  document.querySelectorAll('.tab').forEach((t, i) =>
+    t.classList.toggle('active', type === 'new' ? i === 0 : i === 1));
+  document.getElementById('jNew').classList.toggle('active', type === 'new');
+  document.getElementById('jFull').classList.toggle('active', type === 'full');
+}
+
+function saveEntry(type) {
+  const ta = document.getElementById(type === 'new' ? 'tNew' : 'tFull');
+  const text = ta.value.trim();
+  if (!text) return;
+  const key = 'moonpulse_' + type;
+  let entries = [];
+  try { entries = JSON.parse(localStorage.getItem(key) || '[]'); } catch(e) {}
+  entries.unshift({
+    text,
+    date: new Date().toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' }),
+    phase: phaseName(moonAge(new Date()))
+  });
+  try { localStorage.setItem(key, JSON.stringify(entries.slice(0, 40))); } catch(e) {}
+  ta.value = '';
+  const s = document.getElementById(type === 'new' ? 'sNew' : 'sFull');
+  s.textContent = 'Saved';
+  setTimeout(() => s.textContent = '', 2500);
+  renderEntries(type, entries.slice(0, 40));
+}
+
+function renderEntries(type, entries) {
+  const el = document.getElementById(type === 'new' ? 'eNew' : 'eFull');
+  if (!entries || !entries.length) {
+    el.innerHTML = '<p class="no-entries">No entries yet — write your first intention.</p>';
+    return;
+  }
+  el.innerHTML = entries.map(e => `
+    <div class="entry">
+      <p class="entry-date">${e.date}${e.phase ? ' · ' + e.phase : ''}</p>
+      <p class="entry-text">${e.text.replace(/</g,'&lt;').replace(/>/g,'&gt;')}</p>
+    </div>
+  `).join('');
+}
+
+function loadEntries() {
+  for (const t of ['new', 'full']) {
+    try {
+      const entries = JSON.parse(localStorage.getItem('moonpulse_' + t) || '[]');
+      renderEntries(t, entries);
+    } catch(e) { renderEntries(t, []); }
+  }
+}
+
+updateDisplay();
+setTzLabel();
+loadEntries();
+setInterval(updateDisplay, 60000);
+document.getElementById('cityInput').addEventListener('keydown', e => {
+  if (e.key === 'Enter') setCity();
+});
+</script>
+</body>
+</html>
