@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Game Øf Now</title>
+  <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="../apple-touch-icon.png">
+  <link rel="shortcut icon" href="../favicon.ico">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --ink: #333333;
+      --wine: #990033;
+      --paper: #ffffff;
+    }
+
+    * { box-sizing: border-box; }
+
+    html, body {
+      margin: 0;
+      padding: 0;
+      background: var(--paper);
+    }
+
+    body {
+      font-family: "Cormorant Garamond", "EB Garamond", Georgia, serif;
+      color: var(--ink);
+      font-weight: 400;
+      font-size: 22px;
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    .logo {
+      position: absolute;
+      top: 36px;
+      left: 56px;
+      width: 70px;
+      height: 70px;
+      z-index: 5;
+    }
+
+    .lang-switcher {
+      position: fixed;
+      top: 44px;
+      right: 56px;
+      display: flex;
+      gap: 16px;
+      font-family: "Space Grotesk", "Inter", -apple-system, sans-serif;
+      font-size: 13px;
+      letter-spacing: 0.15em;
+      z-index: 10;
+    }
+    .lang-switcher a {
+      color: rgba(51, 51, 51, 0.55);
+      text-decoration: none;
+      text-transform: uppercase;
+      transition: color 180ms ease;
+    }
+    .lang-switcher a:hover { color: var(--wine); }
+    .lang-switcher a.current {
+      color: var(--ink);
+      font-weight: 700;
+    }
+
+    @media (max-width: 600px) {
+      .lang-switcher {
+        top: 28px;
+        right: 24px;
+        font-size: 11px;
+        gap: 12px;
+      }
+    }
+
+    .bg-mark {
+      position: fixed;
+      top: 50%;
+      right: -650px;
+      transform: translateY(-50%);
+      width: 1600px;
+      height: 1600px;
+      opacity: 0.06;
+      pointer-events: none;
+      z-index: 0;
+      user-select: none;
+    }
+
+    .bg-mark img {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+
+    .page-grid {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      grid-template-columns: minmax(0, 3fr) minmax(0, 2fr);
+      gap: 96px;
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 140px 56px 80px;
+      align-items: start;
+    }
+
+    .words {
+      max-width: 640px;
+    }
+
+    .words p {
+      margin: 0 0 1.4em;
+      text-align: left;
+    }
+
+    .lede {
+      font-size: clamp(34px, 3.6vw, 50px);
+      font-weight: 700;
+      line-height: 1.15;
+      margin-bottom: 1em !important;
+    }
+
+    .question {
+      font-style: italic;
+      font-size: 26px;
+      margin: 1.6em 0 !important;
+    }
+
+    .witness-header {
+      font-weight: 600;
+      margin-bottom: 1em !important;
+    }
+
+    .witness p {
+      margin: 0 0 0.6em !important;
+    }
+
+    .witness {
+      margin: 0 0 1.6em;
+    }
+
+    .shift {
+      font-weight: 700;
+      color: #000000;
+      font-size: 24px;
+    }
+
+    .graham-intro {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      margin: 0 0 1.4em;
+    }
+
+    .graham-portrait {
+      width: 130px;
+      height: 130px;
+      flex-shrink: 0;
+    }
+
+    .graham-intro p {
+      margin: 0;
+      flex: 1;
+    }
+
+    .button-column {
+      position: sticky;
+      top: 32vh;
+      align-self: start;
+      text-align: center;
+    }
+
+    .cta {
+      display: inline-block;
+      font-family: "Space Grotesk", "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+      font-size: clamp(26px, 2.6vw, 38px);
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      padding: clamp(22px, 2.4vw, 30px) clamp(52px, 5.5vw, 80px);
+      background: linear-gradient(135deg, #6E0023 0%, #E91E63 100%);
+      color: #ffffff;
+      border: 4px solid #000000;
+      border-radius: 999px;
+      text-decoration: none;
+      cursor: pointer;
+      transition: background 220ms ease, color 220ms ease, transform 180ms ease, box-shadow 180ms ease;
+      animation: ctaBreath 1.8s ease-in-out infinite;
+      will-change: transform, box-shadow;
+    }
+
+    @keyframes ctaBreath {
+      0%, 100% {
+        transform: scale(1) translateY(0);
+        box-shadow: 6px 8px 6px rgba(0, 0, 0, 0.55);
+      }
+      50% {
+        transform: scale(1.05) translateY(-4px);
+        box-shadow: 10px 14px 10px rgba(0, 0, 0, 0.6);
+      }
+    }
+
+    .cta:hover, .cta:focus {
+      background: linear-gradient(135deg, #ffffff 0%, #ffffff 100%);
+      color: var(--wine);
+      outline: none;
+      animation-play-state: paused;
+      transform: scale(1.07) translateY(-8px);
+      box-shadow: 14px 18px 14px rgba(0, 0, 0, 0.65);
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .cta { animation: none; }
+    }
+
+    @media (max-width: 900px) {
+      .page-grid {
+        grid-template-columns: 1fr;
+        gap: 40px;
+        padding: 110px 28px 64px;
+      }
+      .logo { width: 56px; height: 56px; top: 24px; left: 28px; }
+      .words { max-width: none; }
+      .button-column {
+        position: static;
+        text-align: center;
+      }
+      .bg-mark {
+        width: 900px;
+        height: 900px;
+        right: -260px;
+        opacity: 0.04;
+      }
+      body { font-size: 20px; }
+      .question { font-size: 22px; }
+      .shift { font-size: 22px; }
+      .graham-intro { flex-direction: column; align-items: flex-start; gap: 16px; }
+      .graham-portrait { width: 110px; height: 110px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="bg-mark" aria-hidden="true">
+    <img src="../ring-logo.png" alt="">
+  </div>
+
+  <img src="../ring-logo.png" alt="The Game Øf Now" class="logo">
+
+  <nav class="lang-switcher" aria-label="Idioma">
+    <a href="../booking.html">ENG</a>
+    <a href="booking.html" class="current">CAT</a>
+    <a href="../esp/booking.html">ESP</a>
+  </nav>
+
+  <main class="page-grid">
+
+    <article class="words">
+      <p class="lede">La majoria dels jocs tenen regles fixes. Aquest no.</p>
+
+      <p>A The Game Øf Now, cada joc és diferent. Tu poses les regles. Tu decideixes com jugar.</p>
+
+      <p>Hi ha una pregunta:</p>
+
+      <p class="question">Què és The Game Øf Now?</p>
+
+      <p>Et centres. Preguntes. Respons. Segueixes el que emergeix.</p>
+
+      <p>Simple en teoria. Difícil a la pràctica. Aquesta és la qüestió.</p>
+
+      <p>Juga durant una setmana i veuràs els jocs que has estat jugant en pilot automàtic durant anys. Juga durant un mes i començaràs a triar-los. Juga més temps i començaràs a dissenyar els teus propis. Et converteixes en el dissenyador i jugador de la teva pròpia vida.</p>
+
+      <p class="witness-header">El que reporten els jugadors:</p>
+
+      <div class="witness">
+        <p>Veuen com han estat seguint inconscientment les regles d&rsquo;altres. Pares, parelles, col·legues, cultura. I paren.</p>
+        <p>Recorden que tenen permís. Es desperten a la seva agència personal. I comencen a fer-la servir.</p>
+        <p>Els equips descobreixen com dissenyar maneres més efectives de relacionar-se i crear junts.</p>
+        <p>L&rsquo;atenció es torna menys dispersa i més enfocada.</p>
+        <p>La imaginació i el coratge s&rsquo;enforteixen, millorant la creativitat.</p>
+        <p>La vida torna a fluir.</p>
+      </div>
+
+      <p class="shift">Aquest és el canvi. Aquest és el nou paradigma.</p>
+
+      <div class="graham-intro">
+        <img src="../graham-portrait.png" alt="Graham" class="graham-portrait">
+        <p>Em dic Graham. He jugat a aquest joc durant 20 anys. Per tot el món i amb qualsevol Pep, Jordi i Jean-Marie. Encara em sorprèn. Els teus primers 30 minuts són amb mi, en línia. Comparteixo la meva història i el que pots esperar quan comences a jugar regularment.</p>
+      </div>
+
+      <p>Treballo amb empreses on el vell manual ha deixat de funcionar i tothom ho pot sentir. Amb emprenedors socials ambiciosos en coaching. A conferències animant i connectant els convidats.</p>
+
+      <p>El teu primer joc introductori està lliure d&rsquo;intercanvi de moneda fiat. Aprofundir és un joc de negociació on apugem les apostes i incorporem objectius, valor i diners. En parlem quan arriba el moment.</p>
+    </article>
+
+    <aside class="button-column">
+      <a href="https://cal.com/gameofnow" class="cta">VULL JUGAR</a>
+    </aside>
+
+  </main>
+</body>
+</html>
