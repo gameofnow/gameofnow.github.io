@@ -153,25 +153,32 @@
       font-size: 22px;
       font-weight: 500;
       letter-spacing: 0.02em;
-      padding: 16px 36px;
+      padding: 20px 52px;
       background: var(--wine);
       color: #ffffff;
       border: 3px solid var(--wine);
+      border-radius: 999px;
       text-decoration: none;
       cursor: pointer;
-      transition: background-color 180ms ease, color 180ms ease, transform 180ms ease;
+      transition: background-color 180ms ease, color 180ms ease, transform 180ms ease, box-shadow 180ms ease;
       animation: ctaBreath 2.6s ease-in-out infinite;
       will-change: transform, box-shadow;
     }
 
     @keyframes ctaBreath {
       0%, 100% {
-        transform: scale(1);
-        box-shadow: 0 0 0 0 rgba(153, 0, 51, 0);
+        transform: scale(1) translateY(0);
+        box-shadow:
+          0 14px 32px rgba(0, 0, 0, 0.2),
+          0 4px 10px rgba(0, 0, 0, 0.13),
+          0 0 0 0 rgba(153, 0, 51, 0);
       }
       50% {
-        transform: scale(1.035);
-        box-shadow: 0 0 28px 4px rgba(153, 0, 51, 0.3);
+        transform: scale(1.035) translateY(-3px);
+        box-shadow:
+          0 22px 48px rgba(0, 0, 0, 0.24),
+          0 8px 18px rgba(0, 0, 0, 0.16),
+          0 0 30px 4px rgba(153, 0, 51, 0.3);
       }
     }
 
@@ -182,8 +189,11 @@
       border-color: var(--wine);
       outline: none;
       animation-play-state: paused;
-      transform: scale(1.04);
-      box-shadow: 0 0 32px 6px rgba(153, 0, 51, 0.35);
+      transform: scale(1.05) translateY(-6px);
+      box-shadow:
+        0 32px 60px rgba(0, 0, 0, 0.3),
+        0 14px 28px rgba(0, 0, 0, 0.2),
+        0 0 36px 6px rgba(153, 0, 51, 0.4);
     }
 
     @media (prefers-reduced-motion: reduce) {
