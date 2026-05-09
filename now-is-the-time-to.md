@@ -19,7 +19,7 @@ speak up
 love openly
 cooperate spontaneously
 stop boozing
-press that button over there!
+press that button
 rest fully
 get to know your neighbours
 create freshly
