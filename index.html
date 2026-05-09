@@ -159,7 +159,20 @@
       border: 3px solid var(--wine);
       text-decoration: none;
       cursor: pointer;
-      transition: background-color 180ms ease, color 180ms ease;
+      transition: background-color 180ms ease, color 180ms ease, transform 180ms ease;
+      animation: ctaBreath 2.6s ease-in-out infinite;
+      will-change: transform, box-shadow;
+    }
+
+    @keyframes ctaBreath {
+      0%, 100% {
+        transform: scale(1);
+        box-shadow: 0 0 0 0 rgba(153, 0, 51, 0);
+      }
+      50% {
+        transform: scale(1.035);
+        box-shadow: 0 0 28px 4px rgba(153, 0, 51, 0.3);
+      }
     }
 
     .cta:hover,
@@ -168,6 +181,13 @@
       color: var(--wine);
       border-color: var(--wine);
       outline: none;
+      animation-play-state: paused;
+      transform: scale(1.04);
+      box-shadow: 0 0 32px 6px rgba(153, 0, 51, 0.35);
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .cta { animation: none; }
     }
 
     @media (max-width: 600px) {
@@ -194,7 +214,7 @@
 
     <p class="question">What&rsquo;s The Game Øf Now?</p>
 
-    <p>You stop. You ask. You answer however you want.</p>
+    <p>You centre. You ask. You respond. You follow what emerges.</p>
 
     <p>Simple in theory. Difficult in practice. That&rsquo;s the point.</p>
 
@@ -205,10 +225,11 @@
     <p class="witness-header">What players report:</p>
 
     <div class="witness">
-      <p>They see the games they&rsquo;ve been playing for other people. And stop.</p>
-      <p>They remember they have permission. To start. To stop. To choose differently.</p>
-      <p>Their attention becomes more focused.</p>
-      <p>Their imagination and courage strengthen.</p>
+      <p>They see how they&rsquo;ve been unconsciously following other people&rsquo;s rules. Parents, partners, colleagues, culture. And stop.</p>
+      <p>They remember they have permission. They wake up to their personal agency. And start using it.</p>
+      <p>Teams find out how to design more effective ways of relating and creating together.</p>
+      <p>Attention becomes less dispersed and more focused.</p>
+      <p>Their imagination and courage strengthen, upgrading creativity.</p>
       <p>Life starts to flow again.</p>
     </div>
 
@@ -218,14 +239,14 @@
 
     <div class="graham-intro">
       <img src="graham-portrait.png" alt="Graham" class="graham-portrait">
-      <p>My name is Graham. I&rsquo;ve played this game for 20 years. Your first 20 minutes are with me, online. I share my story and what to expect when you start playing.</p>
+      <p>My name is Graham. I&rsquo;ve played this game for 20 years. Your first 30 minutes are with me, online. I share my story and what to expect when you start playing regularly.</p>
     </div>
 
-    <p>I play with businesses developing teams. With entrepreneurs in coaching. At conferences animating the room. And with travellers in Barcelona who want a unique guided experience.</p>
+    <p>I work with businesses where the old playbook has stopped working and everyone can feel it. With entrepreneurs in coaching. At conferences animating and networking the guests.</p>
 
-    <p>Your first introductory game is always free. Going deeper is priced fairly. We talk about it when the time comes.</p>
+    <p>Your first introductory game is always free. Going deeper is a negotiation game where we up the stakes and bring in goals, value and money. We talk about it when the time comes.</p>
 
-    <p class="cta-tagline">To start playing and wake up in your own life</p>
+    <p class="cta-tagline">To start playing</p>
 
     <div class="point-down" aria-hidden="true">👇🏿</div>
 
