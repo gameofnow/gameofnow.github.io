@@ -4,6 +4,10 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>The Game Øf Now</title>
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="favicon-16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+  <link rel="shortcut icon" href="favicon.ico">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
@@ -34,6 +38,39 @@
       width: 70px;
       height: 70px;
       z-index: 5;
+    }
+
+    .lang-switcher {
+      position: fixed;
+      top: 44px;
+      right: 56px;
+      display: flex;
+      gap: 16px;
+      font-family: "Space Grotesk", "Inter", -apple-system, sans-serif;
+      font-size: 13px;
+      letter-spacing: 0.15em;
+      z-index: 10;
+    }
+    .lang-switcher a {
+      color: rgba(17, 17, 17, 0.75);
+      text-decoration: none;
+      text-transform: uppercase;
+      transition: color 180ms ease;
+    }
+    .lang-switcher a:hover { color: var(--wine); }
+    .lang-switcher a.current {
+      color: var(--ink);
+      font-weight: 700;
+    }
+
+    @media (max-width: 600px) {
+      .lang-switcher {
+        top: 22px;
+        right: 20px;
+        font-size: 13px;
+        gap: 14px;
+      }
+      .lang-switcher a { color: rgba(17, 17, 17, 0.85); }
     }
 
     .bg-mark {
@@ -226,6 +263,12 @@
   </div>
 
   <img src="ring-logo.png" alt="The Game Øf Now" class="logo">
+
+  <nav class="lang-switcher" aria-label="Language">
+    <a href="index.html" class="current">ENG</a>
+    <a href="cat/index.html">CAT</a>
+    <a href="esp/index.html">ESP</a>
+  </nav>
 
   <main class="page">
     <div class="left">
