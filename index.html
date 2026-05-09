@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Game Øf Now</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --ink: #333333;
+      --wine: #990033;
+      --paper: #ffffff;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html, body {
+      margin: 0;
+      padding: 0;
+      background: var(--paper);
+    }
+
+    body {
+      font-family: "Cormorant Garamond", "EB Garamond", Georgia, serif;
+      color: var(--ink);
+      font-weight: 400;
+      font-size: 22px;
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    .page {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 80px 32px 120px;
+      text-align: center;
+    }
+
+    .logo {
+      width: 140px;
+      height: 140px;
+      margin: 0 auto 56px;
+      display: block;
+    }
+
+    p {
+      margin: 0 0 1.4em;
+      text-align: left;
+    }
+
+    .lede {
+      font-size: 26px;
+      font-weight: 500;
+      margin-bottom: 1.6em;
+      text-align: left;
+    }
+
+    .tagline {
+      font-size: 24px;
+      font-weight: 500;
+      font-style: italic;
+      text-align: left;
+      color: var(--wine);
+      margin-bottom: 1.8em;
+    }
+
+    .question {
+      font-style: italic;
+      font-size: 26px;
+      text-align: left;
+      margin: 1.6em 0;
+    }
+
+    .divider {
+      text-align: center;
+      font-size: 64px;
+      line-height: 1;
+      color: var(--wine);
+      margin: 56px 0;
+      font-weight: 300;
+    }
+
+    .witness-header {
+      font-weight: 600;
+      margin-bottom: 1em;
+    }
+
+    .witness p {
+      margin: 0 0 0.6em;
+    }
+
+    .witness {
+      margin-bottom: 1.6em;
+    }
+
+    .shift {
+      font-weight: 700;
+      color: #000000;
+      font-size: 24px;
+    }
+
+    .graham-intro {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      margin: 0 0 1.4em;
+    }
+
+    .graham-portrait {
+      width: 130px;
+      height: 130px;
+      flex-shrink: 0;
+    }
+
+    .graham-intro p {
+      margin: 0;
+      flex: 1;
+    }
+
+    .cta-tagline {
+      text-align: center;
+      font-style: italic;
+      font-size: 22px;
+      margin-top: 56px;
+      margin-bottom: 12px;
+      color: var(--ink);
+    }
+
+    .point-down {
+      text-align: center;
+      font-size: 44px;
+      line-height: 1;
+      margin-bottom: 16px;
+    }
+
+    .cta-wrap {
+      text-align: center;
+      margin-top: 0;
+    }
+
+    .cta {
+      display: inline-block;
+      font-family: inherit;
+      font-size: 22px;
+      font-weight: 500;
+      letter-spacing: 0.02em;
+      padding: 16px 36px;
+      background: var(--wine);
+      color: #ffffff;
+      border: 3px solid var(--wine);
+      text-decoration: none;
+      cursor: pointer;
+      transition: background-color 180ms ease, color 180ms ease;
+    }
+
+    .cta:hover,
+    .cta:focus {
+      background: #ffffff;
+      color: var(--wine);
+      border-color: var(--wine);
+      outline: none;
+    }
+
+    @media (max-width: 600px) {
+      body { font-size: 20px; }
+      .page { padding: 56px 24px 96px; }
+      .logo { width: 110px; height: 110px; margin-bottom: 40px; }
+      .lede, .question, .tagline { font-size: 22px; }
+      .shift { font-size: 22px; }
+      .divider { font-size: 56px; margin: 44px 0; }
+      .graham-intro { flex-direction: column; align-items: flex-start; gap: 16px; }
+      .graham-portrait { width: 110px; height: 110px; }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <img src="ring-logo.png" alt="The Game Øf Now" class="logo">
+
+    <p class="lede">Most games have fixed rules. This one doesn&rsquo;t.</p>
+
+    <p>In The Game Øf Now, every game is different. You set the rules. You decide how to play.</p>
+
+    <p>There is one question:</p>
+
+    <p class="question">What&rsquo;s The Game Øf Now?</p>
+
+    <p>You stop. You ask. You answer however you want.</p>
+
+    <p>Simple in theory. Difficult in practice. That&rsquo;s the point.</p>
+
+    <p>Play it for a week and you see the games you&rsquo;ve been playing on autopilot for years. Play it for a month and you start choosing them. Play it longer and you design your own.</p>
+
+    <div class="divider" aria-hidden="true">&infin;</div>
+
+    <p class="witness-header">What players report:</p>
+
+    <div class="witness">
+      <p>They see the games they&rsquo;ve been playing for other people. And stop.</p>
+      <p>They remember they have permission. To start. To stop. To choose differently.</p>
+      <p>Their attention becomes more focused.</p>
+      <p>Their imagination and courage strengthen.</p>
+      <p>Life starts to flow again.</p>
+    </div>
+
+    <p class="shift">That&rsquo;s the shift.</p>
+
+    <div class="divider" aria-hidden="true">&infin;</div>
+
+    <div class="graham-intro">
+      <img src="graham-portrait.png" alt="Graham" class="graham-portrait">
+      <p>My name is Graham. I&rsquo;ve played this game for 20 years. Your first 20 minutes are with me, online. I share my story and what to expect when you start playing.</p>
+    </div>
+
+    <p>I play with businesses building teams. With executives in coaching. At conferences animating the room. And with travellers in Barcelona who want a unique guided experience.</p>
+
+    <p>Your first introductory game is always free. Going deeper is priced fairly. We talk about it when the time comes.</p>
+
+    <p class="cta-tagline">To start playing and wake up in your own life</p>
+
+    <div class="point-down" aria-hidden="true">👇🏿</div>
+
+    <div class="cta-wrap">
+      <a href="https://cal.com/gameofnow" class="cta">Book now</a>
+    </div>
+  </main>
+</body>
+</html>
