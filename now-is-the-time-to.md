@@ -12,7 +12,7 @@ Current count: **53**.
 listen attentively
 play boldly
 breathe consciously
-forgive appropriately
+forgive 
 begin yet again
 stand on your head
 speak up
