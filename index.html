@@ -3,266 +3,347 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>The Game Øf Now</title>
-  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="favicon-16.png">
-  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
-  <link rel="shortcut icon" href="favicon.ico">
+  <title>The Game Øf Now — Layout A</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
   <style>
     :root {
-      --ink: #333333;
+      --ink: #111111;
+      --soft-ink: rgba(17, 17, 17, 0.55);
       --wine: #990033;
       --paper: #ffffff;
     }
 
-    * {
-      box-sizing: border-box;
-    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
 
     html, body {
-      margin: 0;
-      padding: 0;
+      min-height: 100vh;
+      width: 100%;
       background: var(--paper);
-    }
-
-    body {
       font-family: "Cormorant Garamond", "EB Garamond", Georgia, serif;
       color: var(--ink);
-      font-weight: 400;
-      font-size: 22px;
-      line-height: 1.7;
       -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
-    }
-
-    .page {
-      max-width: 680px;
-      margin: 0 auto;
-      padding: 80px 32px 120px;
-      text-align: center;
+      overflow-x: hidden;
     }
 
     .logo {
-      width: 140px;
-      height: 140px;
-      margin: 0 auto 56px;
+      position: absolute;
+      top: 36px;
+      left: 56px;
+      width: 70px;
+      height: 70px;
+      z-index: 5;
+    }
+
+    .bg-mark {
+      position: fixed;
+      top: 50%;
+      right: -650px;
+      transform: translateY(-50%);
+      width: 1600px;
+      height: 1600px;
+      opacity: 0.06;
+      pointer-events: none;
+      z-index: 0;
+      user-select: none;
+    }
+
+    .bg-mark img {
+      width: 100%;
+      height: 100%;
       display: block;
     }
 
-    p {
-      margin: 0 0 1.4em;
-      text-align: left;
+    .page,
+    .logo {
+      position: relative;
+      z-index: 1;
     }
 
-    .lede {
-      font-size: 26px;
-      font-weight: 500;
-      margin-bottom: 1.6em;
-      text-align: left;
+    .logo {
+      position: absolute;
+      z-index: 5;
     }
 
-    .tagline {
-      font-size: 24px;
-      font-weight: 500;
+    .page {
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 60fr 40fr;
+      padding: 140px 56px 64px;
+      gap: 48px;
+      align-items: center;
+    }
+
+    .left {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      max-width: 720px;
+    }
+
+    .title {
+      font-size: clamp(48px, 6vw, 88px);
+      font-weight: 400;
+      line-height: 1.05;
+      letter-spacing: -0.005em;
+      margin-bottom: 0.7em;
+    }
+
+    .prefix {
+      font-size: clamp(22px, 2.6vw, 36px);
+      color: var(--soft-ink);
+      letter-spacing: 0.01em;
+      margin-bottom: 0.4em;
+      font-weight: 400;
+    }
+
+    .rotating {
+      font-size: clamp(40px, 5vw, 72px);
       font-style: italic;
-      text-align: left;
       color: var(--wine);
-      margin-bottom: 1.8em;
+      font-weight: 500;
+      line-height: 1.15;
+      min-height: 1.4em;
     }
 
-    .question {
-      font-style: italic;
-      font-size: 26px;
-      text-align: left;
-      margin: 1.6em 0;
+    .rotating.prompt {
+      color: var(--soft-ink);
+      cursor: pointer;
+      text-decoration: underline;
+      text-decoration-style: dotted;
+      text-underline-offset: 0.18em;
+      text-decoration-thickness: 1.5px;
     }
-
-    .divider {
-      text-align: center;
-      font-size: 64px;
-      line-height: 1;
+    .rotating.prompt:hover {
       color: var(--wine);
-      margin: 56px 0;
-      font-weight: 300;
     }
 
-    .witness-header {
-      font-weight: 600;
-      margin-bottom: 1em;
+    .invite {
+      margin-top: 1.6em;
+      font-size: 16px;
+      color: var(--soft-ink);
+      letter-spacing: 0.02em;
     }
-
-    .witness p {
-      margin: 0 0 0.6em;
+    .invite a {
+      color: var(--wine);
+      text-decoration: underline;
+      text-decoration-thickness: 1px;
+      text-underline-offset: 0.2em;
     }
-
-    .witness {
-      margin-bottom: 1.6em;
-    }
-
-    .shift {
-      font-weight: 700;
+    .invite a:hover {
       color: #000000;
-      font-size: 24px;
     }
 
-    .graham-intro {
+    .cursor {
+      display: inline-block;
+      font-style: normal;
+      color: var(--wine);
+      margin-left: 0.05em;
+      animation: blink 0.9s step-end infinite;
+    }
+
+    @keyframes blink {
+      0%, 50% { opacity: 1; }
+      50.01%, 100% { opacity: 0; }
+    }
+
+    .right {
       display: flex;
       align-items: center;
-      gap: 24px;
-      margin: 0 0 1.4em;
-    }
-
-    .graham-portrait {
-      width: 130px;
-      height: 130px;
-      flex-shrink: 0;
-    }
-
-    .graham-intro p {
-      margin: 0;
-      flex: 1;
-    }
-
-    .cta-tagline {
-      text-align: center;
-      font-style: italic;
-      font-size: 22px;
-      margin-top: 56px;
-      margin-bottom: 12px;
-      color: var(--ink);
-    }
-
-    .point-down {
-      text-align: center;
-      font-size: 44px;
-      line-height: 1;
-      margin-bottom: 16px;
-    }
-
-    .cta-wrap {
-      text-align: center;
-      margin-top: 0;
+      justify-content: center;
     }
 
     .cta {
       display: inline-block;
-      font-family: inherit;
-      font-size: 22px;
-      font-weight: 500;
-      letter-spacing: 0.02em;
-      padding: 20px 52px;
-      background: var(--wine);
+      font-family: "Space Grotesk", "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+      font-size: clamp(30px, 3.6vw, 48px);
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      padding: clamp(26px, 3vw, 36px) clamp(64px, 7vw, 104px);
+      background: linear-gradient(135deg, #6E0023 0%, #E91E63 100%);
       color: #ffffff;
-      border: 3px solid var(--wine);
+      border: 4px solid #000000;
       border-radius: 999px;
       text-decoration: none;
       cursor: pointer;
-      transition: background-color 180ms ease, color 180ms ease, transform 180ms ease, box-shadow 180ms ease;
-      animation: ctaBreath 2.6s ease-in-out infinite;
+      transition: background 220ms ease, color 220ms ease, transform 180ms ease, box-shadow 180ms ease;
+      animation: ctaBreath 1.8s ease-in-out infinite;
       will-change: transform, box-shadow;
     }
 
     @keyframes ctaBreath {
       0%, 100% {
         transform: scale(1) translateY(0);
-        box-shadow:
-          0 14px 32px rgba(0, 0, 0, 0.2),
-          0 4px 10px rgba(0, 0, 0, 0.13),
-          0 0 0 0 rgba(153, 0, 51, 0);
+        box-shadow: 6px 8px 6px rgba(0, 0, 0, 0.55);
       }
       50% {
-        transform: scale(1.035) translateY(-3px);
-        box-shadow:
-          0 22px 48px rgba(0, 0, 0, 0.24),
-          0 8px 18px rgba(0, 0, 0, 0.16),
-          0 0 30px 4px rgba(153, 0, 51, 0.3);
+        transform: scale(1.05) translateY(-4px);
+        box-shadow: 10px 14px 10px rgba(0, 0, 0, 0.6);
       }
     }
 
-    .cta:hover,
-    .cta:focus {
-      background: #ffffff;
+    .cta:hover, .cta:focus {
+      background: var(--paper);
       color: var(--wine);
-      border-color: var(--wine);
-      outline: none;
       animation-play-state: paused;
-      transform: scale(1.05) translateY(-6px);
-      box-shadow:
-        0 32px 60px rgba(0, 0, 0, 0.3),
-        0 14px 28px rgba(0, 0, 0, 0.2),
-        0 0 36px 6px rgba(153, 0, 51, 0.4);
+      transform: scale(1.07) translateY(-8px);
+      box-shadow: 14px 18px 14px rgba(0, 0, 0, 0.65);
+      outline: none;
+    }
+
+    .cta:hover, .cta:focus {
+      background: linear-gradient(135deg, #ffffff 0%, #ffffff 100%);
+    }
+
+    @media (max-width: 820px) {
+      .page {
+        grid-template-columns: 1fr;
+        padding: 120px 28px 48px;
+        gap: 56px;
+      }
+      .logo { width: 56px; height: 56px; top: 24px; left: 28px; }
+      .left { max-width: none; }
+      .right { padding: 16px 0 32px; }
+      .bg-mark {
+        width: 900px;
+        height: 900px;
+        right: -260px;
+        opacity: 0.04;
+      }
     }
 
     @media (prefers-reduced-motion: reduce) {
       .cta { animation: none; }
-    }
-
-    @media (max-width: 600px) {
-      body { font-size: 20px; }
-      .page { padding: 56px 24px 96px; }
-      .logo { width: 110px; height: 110px; margin-bottom: 40px; }
-      .lede, .question, .tagline { font-size: 22px; }
-      .shift { font-size: 22px; }
-      .divider { font-size: 56px; margin: 44px 0; }
-      .graham-intro { flex-direction: column; align-items: flex-start; gap: 16px; }
-      .graham-portrait { width: 110px; height: 110px; }
+      .cursor { animation: none; opacity: 1; }
     }
   </style>
 </head>
 <body>
+  <div class="bg-mark" aria-hidden="true">
+    <img src="ring-logo.png" alt="">
+  </div>
+
+  <img src="ring-logo.png" alt="The Game Øf Now" class="logo">
+
   <main class="page">
-    <img src="ring-logo.png" alt="The Game Øf Now" class="logo">
-
-    <p class="lede">Most games have fixed rules. This one doesn&rsquo;t.</p>
-
-    <p>In The Game Øf Now, every game is different. You set the rules. You decide how to play.</p>
-
-    <p>There is one question:</p>
-
-    <p class="question">What&rsquo;s The Game Øf Now?</p>
-
-    <p>You centre. You ask. You respond. You follow what emerges.</p>
-
-    <p>Simple in theory. Difficult in practice. That&rsquo;s the point.</p>
-
-    <p>Play it for a week and you see the games you&rsquo;ve been playing on autopilot for years. Play it for a month and you start choosing them. Play it longer and you start designing your own. You become the designer and player of your own life.</p>
-
-    <div class="divider" aria-hidden="true">&infin;</div>
-
-    <p class="witness-header">What players report:</p>
-
-    <div class="witness">
-      <p>They see how they&rsquo;ve been unconsciously following other people&rsquo;s rules. Parents, partners, colleagues, culture. And stop.</p>
-      <p>They remember they have permission. They wake up to their personal agency. And start using it.</p>
-      <p>Teams find out how to design more effective ways of relating and creating together.</p>
-      <p>Attention becomes less dispersed and more focused.</p>
-      <p>Their imagination and courage strengthen, upgrading creativity.</p>
-      <p>Life starts to flow again.</p>
+    <div class="left">
+      <h1 class="title">The Game Øf Now</h1>
+      <p class="prefix">Now is the time to</p>
+      <p class="rotating" id="rotating"><span id="phrase"></span><span class="cursor">|</span></p>
+      <p class="invite">Send me yours → <a href="mailto:play@gameofnow.com?subject=My%20phrase%20for%20The%20Game%20%C3%98f%20Now&body=Now%20is%20the%20time%20to%20...%0A%0A">play@gameofnow.com</a></p>
     </div>
 
-    <p class="shift">That&rsquo;s the shift.</p>
-
-    <div class="divider" aria-hidden="true">&infin;</div>
-
-    <div class="graham-intro">
-      <img src="graham-portrait.png" alt="Graham" class="graham-portrait">
-      <p>My name is Graham. I&rsquo;ve played this game for 20 years. It still surprises me. Your first 30 minutes are with me, online. I share my story and what to expect when you start playing regularly.</p>
-    </div>
-
-    <p>I work with businesses where the old playbook has stopped working and everyone can feel it. With entrepreneurs in coaching. At conferences animating and networking the guests.</p>
-
-    <p>Your first introductory game is always free. Going deeper is a negotiation game where we up the stakes and bring in goals, value and money. We talk about it when the time comes.</p>
-
-    <p class="cta-tagline">To start playing</p>
-
-    <div class="point-down" aria-hidden="true">👇🏿</div>
-
-    <div class="cta-wrap">
-      <a href="https://cal.com/gameofnow" class="cta">Book now</a>
+    <div class="right">
+      <a href="booking.html" class="cta">ENTER</a>
     </div>
   </main>
+
+  <script>
+    // Source: now-is-the-time-to.md — sync from there.
+    const phrases = [
+      "listen attentively",
+      "play boldly",
+      "breathe consciously",
+      "forgive appropriately",
+      "begin yet again",
+      "stand on your head",
+      "speak up",
+      "love openly",
+      "cooperate spontaneously",
+      "stop boozing",
+      "press that button over there!",
+      "rest fully",
+      "get to know your neighbours",
+      "create freshly",
+      "notice clearly",
+      "arrive home",
+      "hug yourself",
+      "hug your child",
+      "clean up",
+      "grow up",
+      "show up",
+      "wake up",
+      "take the trash out",
+      "upskill",
+      "let go gently",
+      "step forward",
+      "choose differently",
+      "ask honestly",
+      "throw a wobbly",
+      "put the damn phone down",
+      "act simply",
+      "walk slowly",
+      "talk to your Ma",
+      "laugh with your Da",
+      "mow the lawn",
+      "see clearly",
+      "be silent",
+      "start over",
+      "eat your greens",
+      "wake up gently",
+      "look over your shoulder",
+      "say no to you know what",
+      "listen within",
+      "trust deeply",
+      "play together",
+      "swear you will never do that again",
+      "live boldly",
+      "feel everything",
+      "know yourself",
+      "show up fully",
+      "feed the cat",
+      "collude",
+      "put the damn phone down"
+    ];
+
+    // Inject "your phrase here" prompt every 10 phrases.
+    const PROMPT = "your phrase here";
+    const display = [];
+    phrases.forEach((p, i) => {
+      display.push(p);
+      if ((i + 1) % 10 === 0) display.push(PROMPT);
+    });
+
+    const el = document.getElementById("phrase");
+    const rotating = document.getElementById("rotating");
+    let phraseIndex = 0;
+    let charIndex = 0;
+    let isDeleting = false;
+
+    rotating.addEventListener("click", () => {
+      if (display[phraseIndex] === PROMPT) {
+        window.location.href = "mailto:play@gameofnow.com?subject=My%20phrase%20for%20The%20Game%20%C3%98f%20Now&body=Now%20is%20the%20time%20to%20...%0A%0A";
+      }
+    });
+
+    function tick() {
+      const current = display[phraseIndex];
+      const isPrompt = current === PROMPT;
+      rotating.classList.toggle("prompt", isPrompt);
+
+      if (!isDeleting) {
+        charIndex++;
+        el.textContent = current.substring(0, charIndex);
+        if (charIndex === current.length) {
+          setTimeout(() => { isDeleting = true; tick(); }, isPrompt ? 4200 : 2200);
+          return;
+        }
+      } else {
+        charIndex--;
+        el.textContent = current.substring(0, charIndex);
+        if (charIndex === 0) {
+          isDeleting = false;
+          phraseIndex = (phraseIndex + 1) % display.length;
+          setTimeout(tick, 400);
+          return;
+        }
+      }
+
+      setTimeout(tick, isDeleting ? 28 : 65);
+    }
+
+    tick();
+  </script>
 </body>
 </html>
