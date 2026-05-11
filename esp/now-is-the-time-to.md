@@ -10,6 +10,7 @@ Actual: **53**.
 ---
 
 escuchar atentamente
+bajar las estanterías
 jugar con audacia
 respirar conscientemente
 perdonar apropiadamente
