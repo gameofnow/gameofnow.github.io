@@ -10,6 +10,7 @@ Current count: **53**.
 ---
 
 listen attentively
+lower the shelves
 play boldly
 breathe consciously
 forgive 
