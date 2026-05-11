@@ -10,6 +10,7 @@ Comptador actual: **53**.
 ---
 
 escoltar atentament
+baixar els prestatges
 jugar amb audàcia
 respirar conscientment
 perdonar apropiadament
