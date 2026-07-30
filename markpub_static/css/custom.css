@@ -1,243 +1,32 @@
-/*
- * Game Of Now Wiki — Andante theme applied to forte HTML
- * Colours, type, and spacing copied exactly from andante.css (lionsberg.wiki)
- */
-
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;0,8..60,700;1,8..60,400;1,8..60,600&display=swap');
 
-/* ── Tokens (andante dark palette, always-on) ─────────────────────────── */
-
 :root {
-  --bg:           #14141a;
-  --bg-soft:      #1c1c24;
-  --bg-elev:      #20202a;
-  --ink:          #e8e5dc;
-  --ink-soft:     #b8b4a8;
-  --ink-faint:    #7a7770;
-  --rule:         #2c2c36;
-  --rule-soft:    #232330;
-  --accent:       #d09a6c;
-  --accent-soft:  #b07d52;
-  --accent-pale:  #2a2218;
-  --selection:    #3e3220;
-
-  --serif: 'Source Serif 4', Charter, 'Iowan Old Style', Baskerville, 'Times New Roman', serif;
-  --sans:  'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-  --mono:  ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+  --bg: #fbfaf6;
+  --bg-soft: #f3f1ea;
+  --bg-elev: #ffffff;
+  --ink: #1a1814;
+  --ink-soft: #44423d;
+  --ink-faint: #76736c;
+  --rule: #e0ddd4;
+  --rule-soft: #ebe8df;
+  --accent: #6b3e1f;
+  --accent-soft: #8a5a36;
+  --accent-pale: #f0e6d8;
+  --serif: 'Source Serif 4', Charter, Baskerville, serif;
+  --sans: 'Inter', -apple-system, sans-serif;
 }
 
-/* ── Base ─────────────────────────────────────────────────────────────── */
-
-*, *::before, *::after { box-sizing: border-box; }
-
-html {
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-rendering: optimizeLegibility;
-}
-
-body {
-  margin: 0 !important;
-  background: var(--bg) !important;
-  color: var(--ink) !important;
-  font-family: var(--serif) !important;
-  font-size: 1.0625rem !important;
-  line-height: 1.65 !important;
-}
-
-::selection {
-  background: var(--selection);
-  color: var(--ink);
-}
-
-/* ── Links ────────────────────────────────────────────────────────────── */
-
-a {
-  color: var(--accent) !important;
-  text-decoration: none !important;
-}
-a:hover {
-  color: var(--accent-soft) !important;
-  text-decoration: underline !important;
-}
-
-/* ── Header / Nav ─────────────────────────────────────────────────────── */
-
-header {
-  background: rgba(20,20,26,0.88) !important;
-  border-bottom: 1px solid var(--rule-soft) !important;
-  backdrop-filter: blur(12px) !important;
-  -webkit-backdrop-filter: blur(12px) !important;
-}
-
-/* Site title in nav */
-.brand span,
-.nav .brand span {
-  font-family: var(--sans) !important;
-  font-weight: 500 !important;
-  font-size: 0.95rem !important;
-  letter-spacing: 0.02em !important;
-  color: var(--ink) !important;
-}
-
-.brand,
-.nav .brand { text-decoration: none !important; }
-
-.logo {
-  background: linear-gradient(135deg, var(--accent), var(--accent-soft)) !important;
-  border-radius: 4px !important;
-}
-
-.nav a {
-  color: var(--ink-soft) !important;
-  font-family: var(--sans) !important;
-  font-weight: 400 !important;
-  font-size: 0.85rem !important;
-  text-decoration: none !important;
-}
-.nav a:hover {
-  color: var(--ink) !important;
-  text-decoration: none !important;
-}
-
-/* ── Container / layout ───────────────────────────────────────────────── */
-
-.container {
-  max-width: 36rem !important;
-  margin-inline: auto !important;
-  padding: 3rem 1.5rem 6rem !important;
-}
-
-/* ── Headings ─────────────────────────────────────────────────────────── */
-
-h1, h2, h3, h4, h5, h6 {
-  font-family: var(--serif) !important;
-  color: var(--ink) !important;
-  line-height: 1.2 !important;
-  font-weight: 600 !important;
-  letter-spacing: -0.01em !important;
-}
-
-h1 { font-size: 2.5rem !important; font-weight: 400 !important; letter-spacing: -0.02em !important; margin: 0 0 1.5rem !important; }
-h2 { font-size: 1.625rem !important; margin: 2.5rem 0 0.75rem !important; }
-h3 { font-size: 1.25rem !important; margin: 2rem 0 0.5rem !important; }
-h4 { font-family: var(--sans) !important; font-size: 0.9rem !important; text-transform: uppercase !important; letter-spacing: 0.08em !important; color: var(--ink-soft) !important; font-weight: 500 !important; }
-
-/* ── Paragraphs ───────────────────────────────────────────────────────── */
-
-p { margin: 0 0 1rem !important; }
-
-/* ── Blockquotes ──────────────────────────────────────────────────────── */
-
-blockquote {
-  margin: 1.5rem 0 !important;
-  padding: 0 0 0 1.5rem !important;
-  border-left: 2px solid var(--accent) !important;
-  color: var(--ink-soft) !important;
-  font-style: italic !important;
-  background: none !important;
-  border-radius: 0 !important;
-}
-
-/* ── HR ───────────────────────────────────────────────────────────────── */
-
-hr {
-  border: 0 !important;
-  text-align: center !important;
-  margin: 2.5rem auto !important;
-}
-hr::before {
-  content: "·  ·  ·" !important;
-  letter-spacing: 0.5em !important;
-  color: var(--ink-faint) !important;
-  font-size: 0.9em !important;
-}
-
-/* ── Lists ────────────────────────────────────────────────────────────── */
-
-ul li::marker, ol li::marker { color: var(--ink-faint) !important; }
-
-/* ── Code ─────────────────────────────────────────────────────────────── */
-
-code {
-  font-family: var(--mono) !important;
-  font-size: 0.875em !important;
-  background: var(--bg-soft) !important;
-  padding: 0.1em 0.35em !important;
-  border-radius: 3px !important;
-  color: var(--ink) !important;
-}
-pre {
-  background: var(--bg-soft) !important;
-  border: 1px solid var(--rule-soft) !important;
-  border-radius: 8px !important;
-  padding: 1rem 1.25rem !important;
-  overflow-x: auto !important;
-  font-size: 0.875rem !important;
-}
-pre code { background: transparent !important; padding: 0 !important; }
-
-/* ── Callout cards ────────────────────────────────────────────────────── */
-
-.callout, .card {
-  background: var(--bg-elev) !important;
-  border: 1px solid var(--rule) !important;
-  border-radius: 8px !important;
-}
-
-/* ── Footer ───────────────────────────────────────────────────────────── */
-
-footer {
-  border-top: 1px solid var(--rule-soft) !important;
-  background: transparent !important;
-  color: var(--ink-faint) !important;
-  font-family: var(--sans) !important;
-  font-size: 0.8rem !important;
-  text-align: center !important;
-  padding: 2rem 1.5rem !important;
-}
-footer a { color: var(--ink-soft) !important; }
-footer a:hover { color: var(--accent) !important; }
-.foot { background: transparent !important; border: none !important; }
-.muted { color: var(--ink-faint) !important; }
-
-/* ── Buttons ──────────────────────────────────────────────────────────── */
-
-button, .btn, .btn-theme {
-  background: var(--bg-elev) !important;
-  color: var(--ink-soft) !important;
-  border: 1px solid var(--rule) !important;
-  border-radius: 4px !important;
-  font-family: var(--sans) !important;
-  font-size: 0.85rem !important;
-}
-button:hover, .btn:hover { color: var(--ink) !important; border-color: var(--accent) !important; }
-
-/* ── Inputs ───────────────────────────────────────────────────────────── */
-
-input, input[type="text"], input[type="search"] {
-  background: var(--bg-elev) !important;
-  color: var(--ink) !important;
-  border: 1px solid var(--rule) !important;
-  border-radius: 4px !important;
-  font-family: var(--serif) !important;
-}
-input:focus {
-  border-color: var(--accent) !important;
-  box-shadow: 0 0 0 3px var(--accent-pale) !important;
-}
-
-/* ── Scrollbar ────────────────────────────────────────────────────────── */
-
-::-webkit-scrollbar { width: 6px; }
-::-webkit-scrollbar-track { background: var(--bg); }
-::-webkit-scrollbar-thumb { background: var(--rule); border-radius: 3px; }
-::-webkit-scrollbar-thumb:hover { background: var(--ink-faint); }
-
-/* ── Focus ────────────────────────────────────────────────────────────── */
-
-:focus-visible {
-  outline: 2px solid var(--accent) !important;
-  outline-offset: 2px !important;
-  border-radius: 2px !important;
-}
+body { background: var(--bg) !important; color: var(--ink) !important; font-family: var(--serif) !important; font-size: 1.0625rem !important; line-height: 1.65 !important; }
+header { background: rgba(251,250,246,0.92) !important; border-bottom: 1px solid var(--rule-soft) !important; }
+h1,h2,h3,h4,h5,h6 { font-family: var(--serif) !important; color: var(--ink) !important; }
+h1 { font-size: 2.5rem !important; font-weight: 400 !important; letter-spacing: -0.02em !important; }
+h2 { font-size: 1.625rem !important; font-weight: 600 !important; }
+a { color: var(--accent) !important; text-decoration: none !important; }
+a:hover { color: var(--accent-soft) !important; text-decoration: underline !important; }
+.brand span { font-family: var(--sans) !important; font-size: 0.95rem !important; font-weight: 500 !important; color: var(--ink) !important; }
+footer { background: transparent !important; color: var(--ink-faint) !important; font-family: var(--sans) !important; font-size: 0.8rem !important; border-top: 1px solid var(--rule-soft) !important; }
+.callout { background: var(--bg-elev) !important; border: 1px solid var(--rule) !important; }
+blockquote { border-left: 2px solid var(--accent) !important; color: var(--ink-soft) !important; background: none !important; }
+code { background: var(--bg-soft) !important; color: var(--ink) !important; }
+pre { background: var(--bg-soft) !important; border: 1px solid var(--rule-soft) !important; }
+button { background: var(--bg-soft) !important; color: var(--ink-soft) !important; border: 1px solid var(--rule) !important; }
