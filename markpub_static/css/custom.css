@@ -1,3 +1,188 @@
-/* Custom CSS
- * Add custom styles here.
-*/
+/* ===== Game Of Now — Andante-style theme override ====================== */
+/* Overrides forte.css to match the dark forest aesthetic of lionsberg.wiki */
+
+@import url('https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Inter:wght@400;500;600&display=swap');
+
+:root,
+[data-theme="dark"],
+@media (prefers-color-scheme: dark) { :root } {
+  /* Palette */
+  --bg:         #18191a;        /* near-black with warm undertone */
+  --text:       #e4dfd3;        /* warm cream */
+  --muted:      #8a9080;        /* sage grey */
+  --border:     #2a2d26;        /* dark olive */
+  --card:       #1e201c;        /* slightly lighter bg */
+  --link:       #a8b88a;        /* muted sage green */
+  --link-hover: #c8d8a8;        /* lighter sage */
+  --brand:      #7a9e6a;        /* forest green */
+  --ring:       rgba(122,158,106,.35);
+
+  /* Typography */
+  --font-sans:  "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-serif: "EB Garamond", Georgia, "Times New Roman", serif;
+}
+
+/* Force dark always — no light mode */
+:root {
+  --bg:         #18191a;
+  --text:       #e4dfd3;
+  --muted:      #8a9080;
+  --border:     #2a2d26;
+  --card:       #1e201c;
+  --link:       #a8b88a;
+  --link-hover: #c8d8a8;
+  --brand:      #7a9e6a;
+  --ring:       rgba(122,158,106,.35);
+}
+
+/* Body */
+body {
+  background: var(--bg) !important;
+  color: var(--text) !important;
+  font-family: var(--font-sans) !important;
+  line-height: 1.7 !important;
+}
+
+/* Headings use serif */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-serif) !important;
+  font-weight: 400 !important;
+  color: var(--text) !important;
+  letter-spacing: 0.01em !important;
+}
+
+h1 { font-size: 2.4rem !important; }
+h2 { font-size: 1.7rem !important; }
+
+/* Header / nav */
+header {
+  background: rgba(24,25,26,0.92) !important;
+  border-bottom: 1px solid var(--border) !important;
+}
+
+.brand span {
+  font-family: var(--font-serif) !important;
+  font-size: 1.5rem !important;
+  letter-spacing: 0.05em !important;
+  color: var(--text) !important;
+}
+
+.logo {
+  background: linear-gradient(135deg, var(--brand), #4a6e3a) !important;
+}
+
+.nav a {
+  color: var(--muted) !important;
+  font-weight: 400 !important;
+  font-size: 0.85rem !important;
+  letter-spacing: 0.08em !important;
+  text-transform: uppercase !important;
+}
+
+.nav a:hover {
+  color: var(--link-hover) !important;
+}
+
+/* Sidebar */
+#sidebar, .sidebar, nav[class*="sidebar"], aside {
+  background: #141614 !important;
+  border-right: 1px solid var(--border) !important;
+}
+
+/* Sidebar nav links */
+#sidebar a, .sidebar a, aside a {
+  color: var(--muted) !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.07em !important;
+  font-size: 0.82rem !important;
+  font-weight: 500 !important;
+  text-decoration: none !important;
+}
+
+#sidebar a:hover, .sidebar a:hover, aside a:hover {
+  color: var(--link-hover) !important;
+}
+
+/* Sidebar section headings */
+#sidebar h2, #sidebar h3, .sidebar h2, .sidebar h3 {
+  font-family: var(--font-sans) !important;
+  font-size: 0.72rem !important;
+  letter-spacing: 0.12em !important;
+  text-transform: uppercase !important;
+  color: var(--brand) !important;
+  margin-bottom: 8px !important;
+}
+
+/* Links in content */
+main a, article a, .content a {
+  color: var(--link) !important;
+  text-decoration: none !important;
+  border-bottom: 1px solid rgba(168,184,138,0.3) !important;
+}
+
+main a:hover, article a:hover, .content a:hover {
+  color: var(--link-hover) !important;
+  border-bottom-color: var(--link-hover) !important;
+}
+
+/* Cards / callouts */
+.callout, .card {
+  background: var(--card) !important;
+  border: 1px solid var(--border) !important;
+  border-radius: 8px !important;
+}
+
+/* Footer */
+footer {
+  border-top: 1px solid var(--border) !important;
+  color: var(--muted) !important;
+  font-size: 0.82rem !important;
+}
+
+footer a {
+  color: var(--muted) !important;
+}
+
+/* Buttons */
+button, .btn {
+  background: var(--card) !important;
+  color: var(--muted) !important;
+  border: 1px solid var(--border) !important;
+  border-radius: 6px !important;
+  font-size: 0.8rem !important;
+  letter-spacing: 0.06em !important;
+}
+
+button:hover, .btn:hover {
+  color: var(--text) !important;
+  border-color: var(--brand) !important;
+}
+
+/* Search input */
+input[type="search"], input[type="text"], input {
+  background: var(--card) !important;
+  color: var(--text) !important;
+  border: 1px solid var(--border) !important;
+  border-radius: 6px !important;
+}
+
+/* Code */
+code, pre {
+  background: #111212 !important;
+  border: 1px solid var(--border) !important;
+  color: #b8c8a0 !important;
+  border-radius: 6px !important;
+}
+
+/* Horizontal rule */
+hr {
+  border: none !important;
+  border-top: 1px solid var(--border) !important;
+  margin: 2rem 0 !important;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: var(--muted); }
