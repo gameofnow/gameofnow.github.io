@@ -1,1 +1,32 @@
-/* use this file to add custom CSS */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;0,8..60,700;1,8..60,400;1,8..60,600&display=swap');
+
+:root {
+  --bg: #fbfaf6;
+  --bg-soft: #f3f1ea;
+  --bg-elev: #ffffff;
+  --ink: #1a1814;
+  --ink-soft: #44423d;
+  --ink-faint: #76736c;
+  --rule: #e0ddd4;
+  --rule-soft: #ebe8df;
+  --accent: #6b3e1f;
+  --accent-soft: #8a5a36;
+  --accent-pale: #f0e6d8;
+  --serif: 'Source Serif 4', Charter, Baskerville, serif;
+  --sans: 'Inter', -apple-system, sans-serif;
+}
+
+body { background: var(--bg) !important; color: var(--ink) !important; font-family: var(--serif) !important; font-size: 1.0625rem !important; line-height: 1.65 !important; }
+header { background: rgba(251,250,246,0.92) !important; border-bottom: 1px solid var(--rule-soft) !important; }
+h1,h2,h3,h4,h5,h6 { font-family: var(--serif) !important; color: var(--ink) !important; }
+h1 { font-size: 2.5rem !important; font-weight: 400 !important; letter-spacing: -0.02em !important; }
+h2 { font-size: 1.625rem !important; font-weight: 600 !important; }
+a { color: var(--accent) !important; text-decoration: none !important; }
+a:hover { color: var(--accent-soft) !important; text-decoration: underline !important; }
+.brand span { font-family: var(--sans) !important; font-size: 0.95rem !important; font-weight: 500 !important; color: var(--ink) !important; }
+footer { background: transparent !important; color: var(--ink-faint) !important; font-family: var(--sans) !important; font-size: 0.8rem !important; border-top: 1px solid var(--rule-soft) !important; }
+.callout { background: var(--bg-elev) !important; border: 1px solid var(--rule) !important; }
+blockquote { border-left: 2px solid var(--accent) !important; color: var(--ink-soft) !important; background: none !important; }
+code { background: var(--bg-soft) !important; color: var(--ink) !important; }
+pre { background: var(--bg-soft) !important; border: 1px solid var(--rule-soft) !important; }
+button { background: var(--bg-soft) !important; color: var(--ink-soft) !important; border: 1px solid var(--rule) !important; }

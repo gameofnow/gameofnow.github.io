@@ -11,4 +11,6 @@ node_modules
 
 # MARKPUB
 .markpub/output/*
+# local build output (CI builds to ./output)
+output/
 
