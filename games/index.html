@@ -91,6 +91,35 @@
       color: var(--soft-ink);
     }
 
+    /* ── "Now choose your game" cue ── */
+    .choose-cue {
+      text-align: center;
+      margin: 1.6em 0 2em;
+    }
+    .choose-cue .choose-text {
+      display: block;
+      font-size: clamp(22px, 2.9vw, 34px);
+      font-weight: 600;
+      font-style: normal;
+      color: #e6007e;
+      letter-spacing: 0.005em;
+      line-height: 1.25;
+    }
+    .choose-cue .choose-finger {
+      display: block;
+      margin-top: 0.3em;
+      font-size: clamp(26px, 3.2vw, 38px);
+      line-height: 1;
+      animation: choose-point 1.9s ease-in-out infinite;
+    }
+    @keyframes choose-point {
+      0%, 100% { transform: translateY(0); }
+      50%      { transform: translateY(7px); }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .choose-cue .choose-finger { animation: none; }
+    }
+
     .menu-price-label {
       font-family: "Space Grotesk", sans-serif;
       font-size: clamp(16px, 1.8vw, 22px);
@@ -358,7 +387,10 @@
 
     <p class="gift-intro">We offer this work as a gift and it is freely given. If this work has genuinely benefited you, we invite you to donate what feels right, in your own time. If you know of foundations who might support the work at larger scale, write to us at <a href="mailto:play@gameofnow.com">play@gameofnow.com</a></p>
 
-    <p class="menu-subtitle" style="text-align:center; margin-bottom: 2em;">Now Choose your Game.</p>
+    <p class="choose-cue">
+      <span class="choose-text">Now choose your game.</span>
+      <span class="choose-finger" role="img" aria-label="pointing down">&#128071;</span>
+    </p>
 
     <!-- ── STARTERS ── -->
     <div class="section-divider">
