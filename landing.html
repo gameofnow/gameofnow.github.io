@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Game Øf Now</title>
+  <meta name="description" content="A practice of transforming any moment into conscious, courageous, creative play.">
+  <link rel="icon" href="/favicon.ico">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --ink: #111111;
+      --soft-ink: rgba(17, 17, 17, 0.55);
+      --wine: #990033;
+      --paper: #ffffff;
+      --rule: rgba(17,17,17,0.12);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html, body {
+      min-height: 100vh;
+      background: var(--paper);
+      font-family: "Cormorant Garamond", Georgia, serif;
+      color: var(--ink);
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    /* ── Donation Banner ── */
+    .top-banner {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      background: var(--wine);
+      display: flex; align-items: center; justify-content: space-between;
+      gap: 16px; padding: 9px 48px;
+    }
+    .banner-text {
+      font-family: "Cormorant Garamond", Georgia, serif;
+      font-size: clamp(13px, 1.4vw, 16px);
+      font-style: italic; color: #fff; line-height: 1.3;
+    }
+    .banner-btn {
+      font-family: "Space Grotesk", sans-serif;
+      font-size: 11px; font-weight: 700; letter-spacing: 0.14em;
+      text-transform: uppercase; color: var(--wine); background: #fff;
+      padding: 6px 18px; border-radius: 999px; text-decoration: none;
+      white-space: nowrap; flex-shrink: 0;
+      transition: background 180ms ease, color 180ms ease;
+    }
+    .banner-btn:hover { background: #00b341; color: #fff; }
+
+    .logo {
+      position: absolute; top: 84px; left: 56px;
+      width: 70px; height: 70px; z-index: 5;
+    }
+
+    .bg-mark {
+      position: fixed; top: 50%; right: -650px;
+      transform: translateY(-50%);
+      width: 1600px; height: 1600px;
+      opacity: 0.06; pointer-events: none; z-index: 0; user-select: none;
+    }
+    .bg-mark img { width: 100%; height: 100%; display: block; }
+
+    .page {
+      position: relative; z-index: 1;
+      max-width: 760px; margin: 0 auto;
+      padding: 200px 56px 120px;
+    }
+
+    /* ── Hero ── */
+    .title {
+      font-size: clamp(34px, 6vw, 88px);
+      font-weight: 400; line-height: 1.05;
+      letter-spacing: -0.005em;
+      margin-bottom: 0.5em; white-space: nowrap;
+    }
+
+    .invitation {
+      font-size: clamp(28px, 4vw, 52px);
+      font-weight: 400; font-style: italic;
+      color: var(--wine); line-height: 1.2;
+      margin-bottom: 1.1em;
+    }
+
+    .lede {
+      font-size: clamp(19px, 2.1vw, 26px);
+      font-weight: 400; line-height: 1.62;
+      color: var(--ink); max-width: 40em;
+      margin-bottom: 2.6em;
+    }
+    .lede em { font-style: italic; color: var(--soft-ink); }
+
+    /* ── Rotating line ── */
+    .prefix {
+      font-size: clamp(20px, 2.4vw, 32px);
+      color: var(--soft-ink); letter-spacing: 0.01em;
+      margin-bottom: 0.3em;
+    }
+    .rotating {
+      font-size: clamp(34px, 4.6vw, 64px);
+      font-style: italic; color: var(--wine);
+      font-weight: 500; line-height: 1.15;
+      min-height: 1.4em; margin-bottom: 2.4em;
+    }
+    .cursor {
+      display: inline-block; font-style: normal; color: var(--wine);
+      margin-left: 0.05em; animation: blink 0.9s step-end infinite;
+    }
+    @keyframes blink { 0%,50% { opacity: 1; } 50.01%,100% { opacity: 0; } }
+
+    /* ── Rule ── */
+    .rule {
+      width: 100%; height: 1px; background: var(--rule);
+      margin: 0 0 2.6em;
+    }
+
+    /* ── Actions ── */
+    .actions { display: flex; flex-direction: column; gap: 4px; margin-bottom: 3.4em; }
+    .action {
+      display: flex; align-items: baseline; gap: 0.55em;
+      font-size: clamp(24px, 3vw, 38px);
+      font-weight: 400; text-decoration: none; color: var(--ink);
+      padding: 14px 0; border-bottom: 1px solid var(--rule);
+      transition: color 180ms ease, padding-left 220ms cubic-bezier(.4,0,.2,1);
+    }
+    .action:hover { color: var(--wine); padding-left: 14px; }
+    .action .arrow { color: var(--wine); font-size: 0.8em; transition: transform 220ms ease; }
+    .action:hover .arrow { transform: translateX(4px); }
+    .action .note {
+      font-family: "Space Grotesk", sans-serif;
+      font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase;
+      color: var(--soft-ink); margin-left: auto; white-space: nowrap;
+    }
+
+    /* ── Footer ── */
+    .foot {
+      font-size: 15px; color: var(--soft-ink); line-height: 1.7;
+    }
+    .foot a { color: var(--wine); text-decoration: none; }
+    .foot a:hover { text-decoration: underline; }
+
+    @media (max-width: 700px) {
+      .top-banner { padding: 8px 20px; gap: 10px; }
+      .logo { top: 68px; left: 24px; width: 56px; height: 56px; }
+      .page { padding: 160px 24px 90px; }
+      .title { white-space: normal; }
+      .action .note { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="top-banner">
+    <span class="banner-text">Please support the development of our work at The Game Øf Now</span>
+    <a href="/donate.html" class="banner-btn">Donate</a>
+  </div>
+
+  <div class="bg-mark" aria-hidden="true">
+    <img src="/ring-logo.png" alt="">
+  </div>
+
+  <img src="/ring-logo.png" alt="The Game Øf Now" class="logo">
+
+  <main class="page">
+
+    <h1 class="title">The Game Øf Now</h1>
+
+    <p class="invitation">Learn to feel alive again.</p>
+
+    <p class="lede">
+      If you feel you are not truly alive and that life has become boring, dull,
+      or repetitive. If you notice yourself thinking, <em>there must be more than
+      this?</em> or <em>I am tired of doing what other people want me to do</em>, then learning how to play The Game Øf Now, and playing regularly,
+      is for you.
+    </p>
+
+    <p class="prefix">Now is the time to</p>
+    <p class="rotating"><span id="phrase"></span><span class="cursor">|</span></p>
+
+    <div class="rule"></div>
+
+    <div class="actions">
+      <a class="action" href="/booking.html">
+        <span class="arrow">&rarr;</span>
+        <span>Book an intro session</span>
+        <span class="note">60 min &middot; free</span>
+      </a>
+      <a class="action" href="/games/">
+        <span class="arrow">&rarr;</span>
+        <span>See the games menu</span>
+        <span class="note">23 games</span>
+      </a>
+      <a class="action" href="/moon.html">
+        <span class="arrow">&rarr;</span>
+        <span>Moon Cycle Games</span>
+        <span class="note">21 days &middot; six players</span>
+      </a>
+    </div>
+
+    <p class="foot">
+      A practice of transforming any moment into conscious, courageous, creative play.<br>
+      Write to <a href="mailto:play@gameofnow.com">play@gameofnow.com</a>
+    </p>
+
+  </main>
+
+  <script>
+    const phrases = [
+      "listen attentively",
+      "play boldly",
+      "breathe consciously",
+      "forgive appropriately",
+      "begin yet again",
+      "stand on your head",
+      "speak up",
+      "love openly",
+      "cooperate spontaneously",
+      "stop boozing",
+      "press that button over there!",
+      "rest fully",
+      "get to know your neighbours",
+      "create freshly",
+      "notice clearly",
+      "arrive home",
+      "hug yourself",
+      "hug your child",
+      "clean up",
+      "grow up",
+      "show up",
+      "wake up",
+      "take the trash out",
+      "upskill",
+      "let go gently",
+      "step forward",
+      "choose differently",
+      "ask honestly",
+      "throw a wobbly",
+      "put the damn phone down",
+      "act simply",
+      "walk slowly",
+      "talk to your Ma",
+      "laugh with your Da",
+      "mow the lawn",
+      "see clearly",
+      "be silent",
+      "start over",
+      "eat your greens",
+      "wake up gently",
+      "look over your shoulder",
+      "say no to you know what",
+      "listen within",
+      "trust deeply",
+      "play together",
+      "swear you will never do that again",
+      "live boldly",
+      "feel everything",
+      "know yourself",
+      "show up fully",
+      "feed the cat",
+      "collude"
+    ];
+
+    const el = document.getElementById("phrase");
+    let pi = Math.floor(Math.random() * phrases.length), pc = 0, pd = false;
+
+    function tick() {
+      const cur = phrases[pi];
+      if (!pd) {
+        pc++;
+        el.textContent = cur.substring(0, pc);
+        if (pc === cur.length) {
+          setTimeout(() => { pd = true; tick(); }, 2800);
+          return;
+        }
+      } else {
+        pc--;
+        el.textContent = cur.substring(0, pc);
+        if (pc === 0) {
+          pd = false;
+          pi = (pi + 1) % phrases.length;
+          setTimeout(tick, 500);
+          return;
+        }
+      }
+      setTimeout(tick, pd ? 24 : 72);
+    }
+
+    if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      tick();
+    } else {
+      el.textContent = phrases[pi];
+    }
+  </script>
+
+  <script src="/menu.js" defer></script>
+</body>
+</html>
