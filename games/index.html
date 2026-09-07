@@ -94,7 +94,11 @@
     /* ── "Now choose your game" cue ── */
     .choose-cue {
       text-align: center;
-      margin: 1.6em 0 3.6em;
+      margin: 1.6em 0 0;
+    }
+    /* Pull Starters up under the finger. Other dividers keep their 9em. */
+    .choose-cue + .section-divider {
+      margin-top: 2.2em;
     }
     .choose-cue .choose-text {
       display: block;
