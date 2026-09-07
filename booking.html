@@ -3,41 +3,32 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>The Game Øf Now</title>
-  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="favicon-16.png">
-  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
-  <link rel="shortcut icon" href="favicon.ico">
+  <title>Make Your Move — The Game Øf Now</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
   <style>
     :root {
-      --ink: #333333;
+      --ink: #111111;
+      --soft-ink: rgba(17, 17, 17, 0.6);
       --wine: #990033;
       --paper: #ffffff;
+      --rule: rgba(17,17,17,0.12);
     }
 
-    * { box-sizing: border-box; }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
 
     html, body {
-      margin: 0;
-      padding: 0;
+      min-height: 100vh;
+      width: 100%;
       background: var(--paper);
-    }
-
-    body {
-      font-family: "Cormorant Garamond", "EB Garamond", Georgia, serif;
+      font-family: "Cormorant Garamond", Georgia, serif;
       color: var(--ink);
-      font-weight: 400;
-      font-size: 22px;
-      line-height: 1.7;
       -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
     }
 
     .logo {
-      position: absolute;
+      position: fixed;
       top: 36px;
       left: 56px;
       width: 70px;
@@ -52,215 +43,318 @@
       transform: translateY(-50%);
       width: 1600px;
       height: 1600px;
-      opacity: 0.06;
+      opacity: 0.05;
       pointer-events: none;
       z-index: 0;
       user-select: none;
     }
 
-    .bg-mark img {
-      width: 100%;
-      height: 100%;
+    .bg-mark img { width: 100%; height: 100%; display: block; }
+
+    .page {
+      position: relative;
+      z-index: 1;
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 130px 56px 100px;
+    }
+
+    .label {
+      font-family: "Space Grotesk", sans-serif;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--wine);
+      margin-bottom: 0.8em;
+    }
+
+    .selected-game {
+      font-size: clamp(28px, 4vw, 52px);
+      font-weight: 400;
+      font-style: italic;
+      line-height: 1.1;
+      margin-bottom: 1.6em;
+    }
+
+    .rule {
+      border: none;
+      border-top: 1px solid var(--rule);
+      margin-bottom: 2em;
+    }
+
+    .intro {
+      font-size: clamp(20px, 2.4vw, 30px);
+      font-weight: 500;
+      line-height: 1.3;
+      margin-bottom: 0.6em;
+    }
+
+    .note {
+      font-size: clamp(16px, 1.8vw, 22px);
+      font-style: italic;
+      color: var(--soft-ink);
+      line-height: 1.6;
+      margin-bottom: 2.4em;
+    }
+
+    .instructions {
+      background: rgba(17,17,17,0.03);
+      border-left: 3px solid var(--wine);
+      padding: 28px 32px;
+      margin-bottom: 2.4em;
+    }
+
+    .instructions-title {
+      font-family: "Space Grotesk", sans-serif;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--wine);
+      margin-bottom: 1.2em;
+    }
+
+    .instructions ol {
+      list-style: none;
+      counter-reset: step;
+      display: flex;
+      flex-direction: column;
+      gap: 1.2em;
+    }
+
+    .instructions ol li {
+      counter-increment: step;
+      display: flex;
+      gap: 14px;
+      font-size: clamp(15px, 1.6vw, 19px);
+      line-height: 1.55;
+    }
+
+    .instructions ol li::before {
+      content: counter(step);
+      font-family: "Space Grotesk", sans-serif;
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--wine);
+      min-width: 20px;
+      padding-top: 4px;
+    }
+
+    .small-note {
+      font-size: clamp(13px, 1.3vw, 15px);
+      font-style: italic;
+      color: var(--soft-ink);
+      margin-top: 0.3em;
       display: block;
     }
 
-    .page-grid {
-      position: relative;
-      z-index: 1;
-      display: grid;
-      grid-template-columns: minmax(0, 3fr) minmax(0, 2fr);
-      gap: 96px;
-      max-width: 1400px;
-      margin: 0 auto;
-      padding: 140px 56px 80px;
-      align-items: start;
+    .channels {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-bottom: 3em;
     }
 
-    .words {
-      max-width: 640px;
-    }
-
-    .words p {
-      margin: 0 0 1.4em;
-      text-align: left;
-    }
-
-    .lede {
-      font-size: clamp(34px, 3.6vw, 50px);
-      font-weight: 700;
-      line-height: 1.15;
-      margin-bottom: 1em !important;
-    }
-
-    .question {
-      font-style: italic;
-      font-size: 26px;
-      margin: 1.6em 0 !important;
-    }
-
-    .witness-header {
-      font-weight: 600;
-      margin-bottom: 1em !important;
-    }
-
-    .witness p {
-      margin: 0 0 0.6em !important;
-    }
-
-    .witness {
-      margin: 0 0 1.6em;
-    }
-
-    .shift {
-      font-weight: 700;
-      color: #000000;
-      font-size: 24px;
-    }
-
-    .graham-intro {
+    .channel-btn {
       display: flex;
       align-items: center;
-      gap: 24px;
-      margin: 0 0 1.4em;
-    }
-
-    .graham-portrait {
-      width: 130px;
-      height: 130px;
-      flex-shrink: 0;
-    }
-
-    .graham-intro p {
-      margin: 0;
-      flex: 1;
-    }
-
-    .button-column {
-      position: sticky;
-      top: 32vh;
-      align-self: start;
-      text-align: center;
-    }
-
-    .cta {
-      display: inline-block;
-      font-family: "Space Grotesk", "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
-      font-size: clamp(26px, 2.6vw, 38px);
-      font-weight: 700;
-      letter-spacing: 0.08em;
-      padding: clamp(22px, 2.4vw, 30px) clamp(52px, 5.5vw, 80px);
-      background: linear-gradient(135deg, #6E0023 0%, #E91E63 100%);
-      color: #ffffff;
-      border: 4px solid #000000;
+      gap: 16px;
+      font-family: "Space Grotesk", sans-serif;
+      font-size: clamp(16px, 1.8vw, 20px);
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      padding: 18px 28px;
       border-radius: 999px;
       text-decoration: none;
-      cursor: pointer;
-      transition: background 220ms ease, color 220ms ease, transform 180ms ease, box-shadow 180ms ease;
-      animation: ctaBreath 1.8s ease-in-out infinite;
-      will-change: transform, box-shadow;
+      border: 2px solid #000000;
+      color: var(--ink);
+      background: var(--paper);
+      transition: background 180ms ease, color 180ms ease, transform 120ms ease;
     }
 
-    @keyframes ctaBreath {
-      0%, 100% {
-        transform: scale(1) translateY(0);
-        box-shadow: 6px 8px 6px rgba(0, 0, 0, 0.55);
-      }
-      50% {
-        transform: scale(1.05) translateY(-4px);
-        box-shadow: 10px 14px 10px rgba(0, 0, 0, 0.6);
-      }
+    .channel-btn:hover {
+      background: var(--ink);
+      color: var(--paper);
+      transform: translateX(4px);
     }
 
-    .cta:hover, .cta:focus {
-      background: linear-gradient(135deg, #ffffff 0%, #ffffff 100%);
-      color: var(--wine);
-      outline: none;
-      animation-play-state: paused;
-      transform: scale(1.07) translateY(-8px);
-      box-shadow: 14px 18px 14px rgba(0, 0, 0, 0.65);
+    .channel-btn svg {
+      width: 28px;
+      height: 28px;
+      flex-shrink: 0;
+      fill: currentColor;
     }
 
-    @media (prefers-reduced-motion: reduce) {
-      .cta { animation: none; }
+    .back-link {
+      display: inline-block;
+      margin-top: 2em;
+      font-family: "Space Grotesk", sans-serif;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      color: var(--soft-ink);
+      text-decoration: none;
     }
+    .back-link:hover { color: var(--ink); }
 
-    @media (max-width: 900px) {
-      .page-grid {
-        grid-template-columns: 1fr;
-        gap: 40px;
-        padding: 110px 28px 64px;
-      }
-      .logo { width: 56px; height: 56px; top: 24px; left: 28px; }
-      .words { max-width: none; }
-      .button-column {
-        position: static;
-        text-align: center;
-      }
-      .bg-mark {
-        width: 900px;
-        height: 900px;
-        right: -260px;
-        opacity: 0.04;
-      }
-      body { font-size: 20px; }
-      .question { font-size: 22px; }
-      .shift { font-size: 22px; }
-      .graham-intro { flex-direction: column; align-items: flex-start; gap: 16px; }
-      .graham-portrait { width: 110px; height: 110px; }
+    @media (max-width: 700px) {
+      .logo { width: 52px; height: 52px; top: 24px; left: 24px; }
+      .page { padding: 110px 24px 72px; }
     }
-  </style>
+  
+    /* ── Donation Banner ── */
+    .top-banner {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      background: #990033;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 9px 48px;
+    }
+    .banner-text {
+      font-family: "Cormorant Garamond", Georgia, serif;
+      font-size: clamp(13px, 1.4vw, 16px);
+      font-style: italic;
+      color: #ffffff;
+      line-height: 1.3;
+    }
+    .banner-btn {
+      font-family: "Space Grotesk", sans-serif;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: #990033;
+      background: #ffffff;
+      padding: 6px 18px;
+      border-radius: 999px;
+      text-decoration: none;
+      white-space: nowrap;
+      flex-shrink: 0;
+      transition: background 180ms ease, color 180ms ease;
+    }
+    .banner-btn:hover {
+      background: #00b341;
+      color: #ffffff;
+    }
+    /* push logo below banner */
+    .logo { top: 84px !important; }
+    /* push page content down to clear logo */
+    .page { padding-top: 160px !important; }
+    @media (max-width: 700px) {
+      .top-banner { padding: 8px 20px; gap: 10px; }
+      .logo { top: 68px !important; }
+      .page { padding-top: 140px !important; }
+    }
+</style>
 </head>
 <body>
+  <div class="top-banner">
+    <span class="banner-text">Please support the development of our work at The Game Øf Now</span>
+    <a href="donate.html" class="banner-btn">Donate</a>
+  </div>
+
+
   <div class="bg-mark" aria-hidden="true">
     <img src="ring-logo.png" alt="">
   </div>
 
-  <img src="ring-logo.png" alt="The Game Øf Now" class="logo">
+  <a href="index.html"><img src="ring-logo.png" alt="The Game Øf Now" class="logo"></a>
 
-  <main class="page-grid">
+  <main class="page">
 
-    <article class="words">
-      <p class="lede">Most games have fixed rules. This one doesn&rsquo;t.</p>
+    <p class="label">You selected</p>
+    <h1 class="selected-game" id="game-name">a game</h1>
 
-      <p>In The Game Øf Now, every game is different. You set the rules. You decide how to play.</p>
+    <hr class="rule">
 
-      <p>There is one question:</p>
+    <p class="intro">Make your first move.</p>
+    <p class="note">We don't use automated booking calendars or reminders. The sooner we are in direct contact, human to human, the better.<br><br>We nearly always respond within 36 hours. Sometimes we respond immediately, which can be a bit of a shock to people. Don't say we didn't warn you.</p>
 
-      <p class="question">What&rsquo;s The Game Øf Now?</p>
+    <div class="instructions">
+      <p class="instructions-title">Please include in your message</p>
+      <ol>
+        <li>
+          <div>
+            Your name
+            <span class="small-note">Doesn't have to be your real name.</span>
+          </div>
+        </li>
+        <li>
+          <div>
+            The nearest hill, mountain, or body of water to your current home
+            <span class="small-note">We are more interested in your surrounding landscape than the numbered box you live in. Some people live in streets named after people of dubious character from the past.</span>
+          </div>
+        </li>
+        <li>
+          <div>
+            In your own words, why you want to play <em id="game-inline">the game you selected</em>
+            <span class="small-note">Spelling and grmmr mistakes are very welcome. As are non-linear streams of consciousness. Robots will be ignored.</span>
+          </div>
+        </li>
+      </ol>
+    </div>
 
-      <p>You centre. You ask. You respond. You follow what emerges.</p>
+    <div class="channels">
 
-      <p>Simple in theory. Difficult in practice. That&rsquo;s the point.</p>
+      <a id="email-link" href="mailto:play@gameofnow.com" class="channel-btn">
+        <!-- Email -->
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 4H4C2.9 4 2 4.9 2 6v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4-8 5-8-5V6l8 5 8-5v2z"/></svg>
+        Email us
+      </a>
 
-      <p>Play it for a week and you see the games you&rsquo;ve been playing on autopilot for years. Play it for a month and you start choosing them. Play it longer and you start designing your own. You become the designer and player of your own life.</p>
+      <a id="whatsapp-link" href="https://wa.me/34658366933" class="channel-btn" target="_blank" rel="noopener">
+        <!-- WhatsApp -->
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        WhatsApp us
+      </a>
 
-      <p class="witness-header">What players report:</p>
+      <a id="signal-link" href="https://signal.me/#p/+34658366933" class="channel-btn" target="_blank" rel="noopener">
+        <!-- Signal -->
+        <svg viewBox="24 24 75 75" xmlns="http://www.w3.org/2000/svg"><path d="M61.44,31.67A29.77,29.77,0,0,0,36.25,77.28L33.39,89.49,45.6,86.63a29.77,29.77,0,1,0,15.84-55ZM44.44,90l-4.92,1.15.78,3.34,3.62-.84A36.33,36.33,0,0,0,52.63,97l.82-3.34a32.83,32.83,0,0,1-9-3.71l0,0Zm-16-7.44,3.35.77,1.14-4.91a33.16,33.16,0,0,1-3.69-9l-3.33.83a36.23,36.23,0,0,0,3.37,8.7l-.84,3.63Zm8.06,9.28L29.38,93.5,31,86.41l-3.35-.79L26,92.72a3.43,3.43,0,0,0,4.12,4.12l7.09-1.63-.78-3.37Zm20-63.24a33.86,33.86,0,0,1,10,0l.51-3.39a36.74,36.74,0,0,0-11,0l.52,3.39ZM92.82,42.5l-2.94,1.76a33.37,33.37,0,0,1,3.8,9.2L97,52.64A36.46,36.46,0,0,0,92.82,42.5Zm-58.1-.75a33,33,0,0,1,7-7l-2.06-2.77A36.65,36.65,0,0,0,32,39.68l2.77,2.07Zm46.41-7a33.09,33.09,0,0,1,7,7l2.77-2.07a36.88,36.88,0,0,0-7.74-7.74l-2.07,2.77Zm7,46.42a33.09,33.09,0,0,1-7,7l2,2.76a36.79,36.79,0,0,0,7.77-7.74l-2.77-2.06ZM66.42,94.27a33.19,33.19,0,0,1-10,0L56,97.67a36.74,36.74,0,0,0,11,0l-.52-3.4ZM97,70.23l-3.33-.82a33.45,33.45,0,0,1-3.81,9.21l2.94,1.77A36.43,36.43,0,0,0,97,70.23Zm-2.36-8.79a33.17,33.17,0,0,1-.38,5l3.39.52a36.74,36.74,0,0,0,0-11l-3.39.51a33.2,33.2,0,0,1,.38,5ZM80.38,92.81l-1.76-2.94a33.39,33.39,0,0,1-9.2,3.81L70.25,97a36.55,36.55,0,0,0,10.13-4.2ZM28.24,61.44a33.19,33.19,0,0,1,.37-5L25.22,56a36.74,36.74,0,0,0,0,11l3.39-.52a33.16,33.16,0,0,1-.37-5ZM30.07,42.5a36.61,36.61,0,0,0-4.2,10.14l3.33.82A33.39,33.39,0,0,1,33,44.26L30.07,42.5ZM70.23,25.87l-.82,3.33A33.43,33.43,0,0,1,78.62,33l1.77-2.94a36.58,36.58,0,0,0-10.16-4.19Zm-17.58,0,.82,3.33A33.43,33.43,0,0,0,44.26,33L42.5,30.06a36.64,36.64,0,0,1,10.15-4.19Z"/></svg>
+        Signal us
+      </a>
 
-      <div class="witness">
-        <p>They see how they&rsquo;ve been unconsciously following other people&rsquo;s rules. Parents, partners, colleagues, culture. And stop.</p>
-        <p>They remember they have permission. They wake up to their personal agency. And start using it.</p>
-        <p>Teams find out how to design more effective ways of relating and creating together.</p>
-        <p>Attention becomes less dispersed and more focused.</p>
-        <p>Imagination and courage strengthen, upgrading creativity.</p>
-        <p>Life starts to flow again.</p>
-      </div>
+      <a href="https://t.me/+34658366933" class="channel-btn" target="_blank" rel="noopener">
+        <!-- Telegram -->
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>
+        Telegram us
+      </a>
 
-      <p class="shift">That&rsquo;s the shift. That&rsquo;s the new paradigm.</p>
+    </div>
 
-      <div class="graham-intro">
-        <img src="graham-portrait.png" alt="Graham" class="graham-portrait">
-        <p>My name is Graham. I&rsquo;ve played this game for 20 years. All over the world and with every Tom, Dick and Jean-Marie. It still surprises me. Your first 30 minutes are with me, online. I share my story and what to expect when you start playing regularly.</p>
-      </div>
-
-      <p>I work with businesses where the old playbook has stopped working and everyone can feel it. With ambitious social entrepreneurs in coaching. At conferences animating and networking the guests.</p>
-
-      <p>Your first introductory game is free of fiat currency exchange. Going deeper is a negotiation game where we up the stakes and bring in goals, value and money. We talk about it when the time comes.</p>
-    </article>
-
-    <aside class="button-column">
-      <a href="https://cal.com/gameofnow" class="cta">I WANT TO PLAY</a>
-    </aside>
+    <a href="games.html" class="back-link">← Back to Games Menu</a>
 
   </main>
+
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const game = params.get('game') ? decodeURIComponent(params.get('game')) : 'a game';
+
+    document.getElementById('game-name').textContent = game;
+    document.getElementById('game-inline').textContent = game;
+
+    const subject = encodeURIComponent('I want to play: ' + game);
+    const body = encodeURIComponent(
+      'Hi Graham,\n\nI want to play: ' + game + '\n\n' +
+      '1. My name:\n\n' +
+      '2. The nearest hill, mountain or body of water to my home:\n\n' +
+      '3. Why I want to play:\n\n'
+    );
+    document.getElementById('email-link').href = 'mailto:play@gameofnow.com?subject=' + subject + '&body=' + body;
+
+    const waText = encodeURIComponent(
+      'Hi Graham, I want to play: ' + game + '\n\n' +
+      '1. My name:\n2. Nearest landscape:\n3. Why I want to play:\n'
+    );
+    document.getElementById('whatsapp-link').href = 'https://wa.me/34658366933?text=' + waText;
+  </script>
+
 </body>
 </html>
